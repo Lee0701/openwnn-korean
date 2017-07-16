@@ -19,6 +19,8 @@ import me.blog.hgl1002.openwnn.KOKR.DefaultSoftKeyboardKOKR;
 import me.blog.hgl1002.openwnn.KOKR.HangulEngine;
 import me.blog.hgl1002.openwnn.KOKR.TwelveHangulEngine;
 import me.blog.hgl1002.openwnn.KOKR.HangulEngine.*;
+import me.blog.hgl1002.openwnn.KOKR.inputmethod.HardKeyboard;
+import me.blog.hgl1002.openwnn.KOKR.inputmethod.impl.BasicHardKeyboard;
 
 import static me.blog.hgl1002.openwnn.KOKR.LayoutAlphabet.*;
 import static me.blog.hgl1002.openwnn.KOKR.LayoutDubul.*;
@@ -191,6 +193,10 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
 	Handler mTimeOutHandler;
 
+	private boolean mConsumeDownEvent;
+
+	protected HardKeyboard mHardKeyboard;
+
 	private static OpenWnnKOKR mSelf;
 	public static OpenWnnKOKR getInstance() {
 		return mSelf;
@@ -207,6 +213,9 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 		m12keyEngine.setListener(this);
 		
 		mAutoHideMode = false;
+
+		mHardKeyboard = new BasicHardKeyboard(this);
+
 	}
 	
 	public OpenWnnKOKR(Context context) {
@@ -1043,17 +1052,22 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(mTimeOutHandler == null) {
-			mTimeOutHandler = new Handler();
-			mTimeOutHandler.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					onEvent(new OpenWnnEvent(OpenWnnKOKR.TIMEOUT_EVENT));
-					mTimeOutHandler = null;
-				}
-			}, mMoachigiDelay);
+		mConsumeDownEvent = mHardKeyboard.onKeyEvent(event, false);
+		if (!mConsumeDownEvent) {
+			return super.onKeyDown(keyCode, event);
 		}
-		return super.onKeyDown(keyCode, event);
+		return mConsumeDownEvent;
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		boolean ret = mConsumeDownEvent;
+		if (!ret) {
+			ret = super.onKeyUp(keyCode, event);
+		}else{
+			mHardKeyboard.onKeyEvent(event, false);
+		}
+		return ret;
 	}
 
 	@Override
