@@ -623,10 +623,10 @@ public class LayoutShinSebul {
 	};
 
 	public static final int[][] VIRTUAL_SEBUL_SHIN_ORIGINAL = {
-			{HangulEngine.VIRTUAL_JUNG, -5000, 0x1169},
-			{HangulEngine.VIRTUAL_JUNG, -5001, 0x116e},
-			{HangulEngine.VIRTUAL_JUNG, -5002, 0x1173},
-			{HangulEngine.VIRTUAL_JUNG, -5010, 0x119e},
+//			{HangulEngine.VIRTUAL_JUNG, -5000, 0x1169},
+//			{HangulEngine.VIRTUAL_JUNG, -5001, 0x116e},
+//			{HangulEngine.VIRTUAL_JUNG, -5002, 0x1173},
+//			{HangulEngine.VIRTUAL_JUNG, -5010, 0x119e},
 	};
 
 	public static final int[][] JAMO_SEBUL_SHIN_EDIT_CHOJONG = {

@@ -25,8 +25,6 @@ public class OpenWnnControlPanelKOKR extends PreferenceActivity {
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			addPreferencesFromResource(R.xml.openwnn_pref_ko_method);
 			addPreferencesFromResource(R.xml.openwnn_pref_ko_appearance);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_softkeyboard);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_hardkeyboard);
 			addPreferencesFromResource(R.xml.openwnn_pref_ko_system);
 			addPreferencesFromResource(R.xml.openwnn_pref_ko_about);
 		}
@@ -67,7 +65,7 @@ public class OpenWnnControlPanelKOKR extends PreferenceActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_softkeyboard);
+//			addPreferencesFromResource(R.xml.openwnn_pref_ko_softkeyboard);
 		}
 	}
 
@@ -76,7 +74,7 @@ public class OpenWnnControlPanelKOKR extends PreferenceActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_hardkeyboard);
+//			addPreferencesFromResource(R.xml.openwnn_pref_ko_hardkeyboard);
 		}
 	}
 

@@ -13,7 +13,7 @@ public class Layout12KeySebul {
 			{-208, 0x1175, 0x1173},
 			{-209, 0x1102, 0x1103},
 			{-213, 0x11a8, 0x11b8},
-			{-210, DefaultSoftKeyboardKOKR.KEYCODE_KR12_ADDSTROKE},
+//			{-210, DefaultSoftKeyboardKOKR.KEYCODE_KR12_ADDSTROKE},
 			{-211, 0x1100, 0x1105},
 	};
 
@@ -82,7 +82,7 @@ public class Layout12KeySebul {
 			{-2008, -2003},	// ᆞ
 			{-2009, 0x11ab},	// ㄴ
 			{-2010, 0x11b7},	// ㅁ
-			{-2011, DefaultSoftKeyboardKOKR.KEYCODE_KR12_ADDSTROKE},
+//			{-2011, DefaultSoftKeyboardKOKR.KEYCODE_KR12_ADDSTROKE},
 			{-2012, 0x1109},	// ㅅ
 			{-2013, 0x1173},	// ㅡ
 			{-2113, 0x1169},
@@ -204,7 +204,7 @@ public class Layout12KeySebul {
 			{-2011, 0x11ab},	// ㄴ
 			{-2012, 0x11b7},	// ㅁ
 
-			{-2013, DefaultSoftKeyboardKOKR.KEYCODE_KR12_ADDSTROKE},
+//			{-2013, DefaultSoftKeyboardKOKR.KEYCODE_KR12_ADDSTROKE},
 			{-2014, 0x1109},	// ㅅ
 			{-2015, 0x116e},	//* ㅜ
 			{-2016, 0x1165},	//* ㅓ

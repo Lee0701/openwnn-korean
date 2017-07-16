@@ -8,17 +8,17 @@ import java.util.HashMap;
 
 import me.blog.hgl1002.openwnn.KOKR.inputmethod.CharacterGenerator;
 import me.blog.hgl1002.openwnn.KOKR.inputmethod.HardKeyboard;
-import me.blog.hgl1002.openwnn.OpenWnn;
+import me.blog.hgl1002.openwnn.OpenWnnKOKR;
 
 public class BasicHardKeyboard implements HardKeyboard, CharacterGenerator.CharacterGeneratorListener {
 
-	protected OpenWnn parent;
+	protected OpenWnnKOKR parent;
 
 	protected KeyMappings mappings;
 
 	protected CharacterGenerator generator;
 
-	public BasicHardKeyboard(OpenWnn parent) {
+	public BasicHardKeyboard(OpenWnnKOKR parent) {
 		this.parent = parent;
 		// Temporary code for testing.
 		generator = new BasicCharacterGenerator();
