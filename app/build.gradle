@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "me.blog.hgl1002.openwnn"
-        minSdkVersion 4
+        minSdkVersion 5
         targetSdkVersion 25
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_7
@@ -23,5 +23,9 @@ android {
 
     lintOptions {
         disable 'MissingTranslation'
+    }
+    compileOptions {
+        targetCompatibility 1.7
+        sourceCompatibility 1.7
     }
 }
