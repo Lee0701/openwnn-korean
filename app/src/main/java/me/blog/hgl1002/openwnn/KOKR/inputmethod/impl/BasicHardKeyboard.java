@@ -24,11 +24,21 @@ public class BasicHardKeyboard implements HardKeyboard, CharacterGenerator.Chara
 		generator = new BasicCharacterGenerator();
 		generator.addEventListener(this);
 		mappings = new KeyMappings(new HashMap<Integer, Pair<Long, Long>>() {{
-			put(29, new Pair<Long, Long>(0x0003000100000000L, 0L));
-			put(30, new Pair<Long, Long>(0x0003000000010000L, 0L));
-			put(31, new Pair<Long, Long>(0x0003000000000001L, 0L));
-			put(32, new Pair<Long, Long>(0x0003000000000002L, 0L));
+			put(39, new Pair<Long, Long>(0x0003000100000000L, 0L));
+			put(34, new Pair<Long, Long>(0x0003000000010000L, 0L));
+			put(52, new Pair<Long, Long>(0x0003000000000001L, 0L));
+			put(8, new Pair<Long, Long>(0L, 0x0003000000000002L));
 		}});
+	}
+
+	@Override
+	public void onInit() {
+		generator.onInit();
+	}
+
+	@Override
+	public void onDestroy() {
+		generator.onDestroy();
 	}
 
 	@Override
@@ -40,6 +50,15 @@ public class BasicHardKeyboard implements HardKeyboard, CharacterGenerator.Chara
 		boolean shift = event.isShiftPressed();
 
 		int code = event.getKeyCode();
+
+		switch(code) {
+		case KeyEvent.KEYCODE_DEL:
+			if(!generator.onBackspace(0)) {
+				ic.deleteSurroundingText(1, 0);
+			}
+			return true;
+		}
+
 		if(mappings == null) {
 			ic.commitText(code + "", 1);
 		}

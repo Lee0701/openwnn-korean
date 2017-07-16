@@ -39,6 +39,7 @@ public class OpenWnnKOKR extends InputMethodService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		mHardKeyboard.onInit();
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class OpenWnnKOKR extends InputMethodService {
 
 	@Override
 	public void hideWindow() {
-		
+		mHardKeyboard.onDestroy();
 		super.hideWindow();
 	}
 
@@ -113,7 +114,6 @@ public class OpenWnnKOKR extends InputMethodService {
 
 	@Override
 	public boolean onEvaluateInputViewShown() {
-		super.onEvaluateInputViewShown();
 		return true;
 	}
 

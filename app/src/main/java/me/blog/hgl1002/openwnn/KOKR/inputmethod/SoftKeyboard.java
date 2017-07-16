@@ -4,6 +4,9 @@ import android.view.View;
 
 public interface SoftKeyboard {
 
+	public void onInit();
+	public void onDestroy();
+
 	public View createInputView();
 
 	public View createCandidatesView();

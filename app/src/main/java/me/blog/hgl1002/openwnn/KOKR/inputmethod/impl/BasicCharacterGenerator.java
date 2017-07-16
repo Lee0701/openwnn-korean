@@ -2,6 +2,7 @@ package me.blog.hgl1002.openwnn.KOKR.inputmethod.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import me.blog.hgl1002.openwnn.KOKR.inputmethod.CharacterGenerator;
 
@@ -11,105 +12,104 @@ public class BasicCharacterGenerator implements CharacterGenerator {
 
 	protected JamoHandler jamoHandler;
 
-	protected long syllable;
+	protected Stack<Status> history;
+
+	Status currentStatus;
 
 	protected List<CharacterGeneratorListener> listeners = new ArrayList<>();
+
+	@Override
+	public void onInit() {
+		history = new Stack<>();
+		currentStatus = new Status();
+	}
+
+	@Override
+	public void onDestroy() {
+
+	}
 
 	@Override
 	public boolean onJamoCode(long jamoCode) {
 
 		if((jamoCode & MASK_CODE_TYPE) == CODE_HANGUL_3BEOL) {
+
+			history.push(currentStatus);
+			try {
+				currentStatus = (Status) currentStatus.clone();
+			} catch (CloneNotSupportedException e) {};
+
 			jamoCode = jamoCode & MASK_CODE_VALUE;
 
 			if(hasCho(jamoCode)) {
-				if(hasCho(syllable)) {
+				if(hasCho(currentStatus.syllable)) {
 					commitComposing();
 					// TODO: 낱자 조합 만들기
 				}
-				syllable |= (jamoCode & MASK_CHO);
+				long choCode = (jamoCode & MASK_CHO);
+				currentStatus.cho = choCode >> 0x20;
+				currentStatus.syllable |= choCode;
 			}
 			if(hasJung(jamoCode)) {
-				if(hasJung(syllable)) {
+				if(hasJung(currentStatus.syllable)) {
 					commitComposing();
 				}
-				syllable |= (jamoCode & MASK_JUNG);
+				long jungCode = (jamoCode & MASK_JUNG);
+				currentStatus.jung = jungCode >> 0x10;
+				currentStatus.syllable |= jungCode;
 			}
 			if(hasJong(jamoCode)) {
-				if(hasJong(syllable)) {
+				if(hasJong(currentStatus.syllable)) {
 					commitComposing();
 				}
-				syllable |= (jamoCode & MASK_JONG);
+				long jongCode = (jamoCode & MASK_JONG);
+				currentStatus.jong = jongCode >> 0;
+				currentStatus.syllable |= jongCode;
 			}
+			System.out.println(Long.toHexString(currentStatus.syllable));
 			for(CharacterGeneratorListener listener : listeners) {
-				listener.onCompose(getComposing(syllable));
+				String composing = getComposing(currentStatus.syllable);
+				listener.onCompose(composing);
 			}
+
+			return true;
 		}
 
 		return false;
 	}
 
-	/**
-	 * Send events to commit currently composing {@link #syllable}.
-	 */
-	public void commitComposing() {
+	@Override
+	public boolean onBackspace(int mode) {
+		if(history.isEmpty()) {
+			if(currentStatus.syllable != 0) {
+				for(CharacterGeneratorListener listener : listeners) {
+					currentStatus.syllable = 0;
+					listener.onCompose("");
+				}
+				return true;
+			}
+			else return false;
+		}
+		Status status = history.pop();
+		this.currentStatus = status;
 		for(CharacterGeneratorListener listener : listeners) {
-			listener.onCommit(getComposing(syllable));
+			listener.onCompose(getComposing(currentStatus.syllable));
 		}
-		syllable = 0;
+		return true;
 	}
 
-	/**
-	 * Get the {@link String} value for {@code syllable}.
-	 * @param syllable Hangul Syllable Code to get value from.
-	 * @return Corresponding {@link String} value of given {@code syllable}.
-	 */
+	public void commitComposing() {
+		history.clear();
+		for(CharacterGeneratorListener listener : listeners) {
+			listener.onCommit(getComposing(currentStatus.syllable));
+		}
+		currentStatus = new Status();
+	}
+
 	public String getComposing(long syllable) {
-		String composing = "";
-		long cho = (syllable & MASK_CHO) >> 0x20;
-		long jung = (syllable & MASK_JUNG) >> 0x10;
-		long jong = (syllable & MASK_JONG) >> 0x00;
 
-		if(cho != 0 && jung != 0) {
-			// 초성과 중성이 모두 있는 경우 (음절 조합 가능)
-			return (char) (((((cho-1) * 21) + jung-1) * 28) + jong + 0xac00) + "";
-		} else if(cho == 0 && jung != 0 && jong != 0) {
-			// 중성과 종성만 있는 경우
-			return (char) 0x115f + "" + ((char) (jung + 0x1160)) + "" + ((char) (jong + 0x11a7));
-		} else if(cho != 0 && jung == 0 && jong != 0) {
-			// 초성과 종성만 있는 경우
-			return ((char) (cho + 0x10ff)) + "" + (char) 0x1160 + "" + ((char) (jong + 0x11a7));
-		} else if(cho != 0) {
-			return ((char) (cho + 0x10ff)) + "";
-		} else if(jung != 0) {
-			return ((char) (jung + 0x1160)) + "";
-		} else if(jong != 0) {
-			return ((char) (jong + 0x11a7)) + "";
-		}
-		return "";
-	}
+		return BasicCodeSystem.convertHangul(syllable | CODE_HANGUL_3BEOL);
 
-	public boolean isCho(long jamoCode) {
-		return ((jamoCode & MASK_CHO) != 0) && ((jamoCode & MASK_JUNG) == 0) && ((jamoCode & MASK_JONG) == 0);
-	}
-
-	public boolean isJung(long jamoCode) {
-		return ((jamoCode & MASK_CHO) == 0) && ((jamoCode & MASK_JUNG) != 0) && ((jamoCode & MASK_JONG) == 0);
-	}
-
-	public boolean isJong(long jamoCode) {
-		return ((jamoCode & MASK_CHO) == 0) && ((jamoCode & MASK_JUNG) == 0) && ((jamoCode & MASK_JONG) != 0);
-	}
-
-	public boolean hasCho(long jamoCode) {
-		return (jamoCode & MASK_CHO) != 0;
-	}
-
-	public boolean hasJung(long jamoCode) {
-		return (jamoCode & MASK_JUNG) != 0;
-	}
-
-	public boolean hasJong(long jamoCode) {
-		return (jamoCode & MASK_JONG) != 0;
 	}
 
 	@Override
@@ -120,6 +120,62 @@ public class BasicCharacterGenerator implements CharacterGenerator {
 	@Override
 	public void removeEventListener(CharacterGeneratorListener listener) {
 		this.listeners.remove(listener);
+	}
+
+	public static class Status implements Cloneable {
+		protected int automataStatus;
+		protected long cho, jung, jong, syllable;
+
+		@Override
+		protected Object clone() throws CloneNotSupportedException {
+			Status status = new Status();
+			status.automataStatus = automataStatus;
+			status.cho = cho;
+			status.jung = jung;
+			status.jong = jong;
+			status.syllable = syllable;
+			return status;
+		}
+
+		public int getAutomataStatus() {
+			return automataStatus;
+		}
+
+		public void setAutomataStatus(int automataStatus) {
+			this.automataStatus = automataStatus;
+		}
+
+		public long getCho() {
+			return cho;
+		}
+
+		public void setCho(long cho) {
+			this.cho = cho;
+		}
+
+		public long getJung() {
+			return jung;
+		}
+
+		public void setJung(long jung) {
+			this.jung = jung;
+		}
+
+		public long getJong() {
+			return jong;
+		}
+
+		public void setJong(long jong) {
+			this.jong = jong;
+		}
+
+		public long getSyllable() {
+			return syllable;
+		}
+
+		public void setSyllable(long syllable) {
+			this.syllable = syllable;
+		}
 	}
 
 }
