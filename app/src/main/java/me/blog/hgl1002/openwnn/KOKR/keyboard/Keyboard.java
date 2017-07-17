@@ -5,6 +5,6 @@ package me.blog.hgl1002.openwnn.KOKR.keyboard;
  * Created by graphene on 16/07/17.
  */
 
-public final class Keyboard {
+public class Keyboard {
 
 }

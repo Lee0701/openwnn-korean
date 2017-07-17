@@ -6,43 +6,67 @@ package me.blog.hgl1002.openwnn.KOKR.keyboard;
  */
 
 abstract class Component {
-    private final int x;
-    private final int y;
-    private final int width;
-    private final int height;
-    private final int horizontalGap;
-    private final int edgeFlags;
-
-    Component(int x, int y, int width, int height, int horizontalGap, int edgeFlags) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.horizontalGap = horizontalGap;
-        this.edgeFlags = edgeFlags;
-    }
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private int horizontalGap;
+    private int verticalGap;
+    private int edgeFlags;
 
     public int getX() {
         return x;
+    }
+
+    protected void setX(int x) {
+        this.x = x;
     }
 
     public int getY() {
         return y;
     }
 
+    protected void setY(int y) {
+        this.y = y;
+    }
+
     public int getWidth() {
         return width;
+    }
+
+    protected void setWidth(int width) {
+        this.width = width;
     }
 
     public int getHeight() {
         return height;
     }
 
+    protected void setHeight(int height) {
+        this.height = height;
+    }
+
     public int getHorizontalGap() {
         return horizontalGap;
     }
 
+    protected void setHorizontalGap(int horizontalGap) {
+        this.horizontalGap = horizontalGap;
+    }
+
+    public int getVerticalGap() {
+        return verticalGap;
+    }
+
+    protected void setVerticalGap(int verticalGap) {
+        this.verticalGap = verticalGap;
+    }
+
     public int getEdgeFlags() {
         return edgeFlags;
+    }
+
+    protected void setEdgeFlags(int edgeFlags) {
+        this.edgeFlags = edgeFlags;
     }
 }

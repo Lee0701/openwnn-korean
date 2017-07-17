@@ -5,12 +5,17 @@ package me.blog.hgl1002.openwnn.KOKR.keyboard;
  * Created by graphene on 16/07/17.
  */
 
-public final class Spacer extends Component {
+public class Spacer extends Component {
     private final InputDelegation delegateTo;
 
     public Spacer(int x, int y, int width, int height, int horizontalGap, int edgeFlags,
                   InputDelegation delegateTo) {
-        super(x, y, width, height, horizontalGap, edgeFlags);
+        setX(x);
+        setY(y);
+        setWidth(width);
+        setHeight(height);
+        setHorizontalGap(horizontalGap);
+        setEdgeFlags(edgeFlags);
         this.delegateTo = delegateTo;
     }
 
