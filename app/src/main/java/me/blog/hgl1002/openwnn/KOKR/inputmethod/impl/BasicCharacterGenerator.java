@@ -66,7 +66,6 @@ public class BasicCharacterGenerator implements CharacterGenerator {
 				currentStatus.jong = jongCode >> 0;
 				currentStatus.syllable |= jongCode;
 			}
-			System.out.println(Long.toHexString(currentStatus.syllable));
 			for(CharacterGeneratorListener listener : listeners) {
 				String composing = getComposing(currentStatus.syllable);
 				listener.onCompose(composing);

@@ -47,10 +47,9 @@ public class BasicCodeSystem implements CodeSystem {
 				&& (jamoCode & MASK_CODE_TYPE) != CODE_HANGUL_3BEOL) {
 			return "";
 		}
-		int cho = (int) (jamoCode & MASK_CHO) >> 0x20;
-		int jung = (int) (jamoCode & MASK_JUNG) >> 0x10;
-		int jong = (int) (jamoCode & MASK_JONG) >> 0x00;
-		System.out.println(cho + " " + jung + " " + jong);
+		int cho = (int) ((jamoCode & MASK_CHO) >> 0x20);
+		int jung = (int) ((jamoCode & MASK_JUNG) >> 0x10);
+		int jong = (int) ((jamoCode & MASK_JONG) >> 0x00);
 		if(hasCho(jamoCode) && hasJung(jamoCode)) {
 			return new String(new char[] {(char) (((((cho-1) * 21) + jung-1) * 28) + jong + 0xac00)});
 		} else if(hasCho(jamoCode)) {
