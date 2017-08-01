@@ -7,20 +7,23 @@ import java.util.Map;
 
 public class KeyMappings {
 
-	protected Map<Integer, Pair<Long, Long>> mappings;
+	protected long[][] mappings;
 
 	public KeyMappings() {
-		this.mappings = new HashMap<>();
+		this.mappings = new long[0x100][2];
 	}
 
-	public KeyMappings(Map<Integer, Pair<Long, Long>> mappings) {
+	public KeyMappings(long[][] mappings) {
 		this.mappings = mappings;
 	}
 
 	public long get(int keyCode, boolean shift) {
-		if(mappings == null || mappings.get(keyCode) == null) return 0;
-		Pair<Long, Long> pair = mappings.get(keyCode);
-		return shift ? pair.second : pair.first;
+		if(mappings == null) return 0;
+		try {
+			return shift ? mappings[keyCode][1] : mappings[keyCode][0];
+		} catch(ArrayIndexOutOfBoundsException e) {
+			return 0;
+		}
 	}
 
 }
