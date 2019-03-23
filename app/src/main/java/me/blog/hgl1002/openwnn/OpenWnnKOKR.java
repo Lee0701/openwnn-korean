@@ -18,18 +18,10 @@ import android.view.inputmethod.InputMethodManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import me.blog.hgl1002.openwnn.KOKR.DefaultSoftKeyboardKOKR;
 import me.blog.hgl1002.openwnn.KOKR.EngineMode;
@@ -55,7 +47,6 @@ import me.blog.hgl1002.openwnn.event.SoftKeyFlickEvent;
 import me.blog.hgl1002.openwnn.event.SoftKeyGestureEvent;
 import me.blog.hgl1002.openwnn.event.SoftKeyLongPressEvent;
 
-//TODO: Split up unnecessary procedures to each class
 public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
 	public static final int[][] SHIFT_CONVERT = {
@@ -922,7 +913,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 		} else if (key == KeyEvent.KEYCODE_DEL) {
 			if(!mHangulEngine.backspace()) {
 				resetCharComposition();
-				mInputConnection.deleteSurroundingText(1, 0);
+				return false;
 			}
 			if (mHangulEngine.getComposing().equals(""))
 				resetCharComposition();
