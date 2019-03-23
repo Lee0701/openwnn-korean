@@ -47,8 +47,6 @@ import android.widget.TextView;
 
 import me.blog.hgl1002.openwnn.event.CandidateViewTouchEvent;
 import me.blog.hgl1002.openwnn.event.ListCandidatesEvent;
-import me.blog.hgl1002.openwnn.event.OpenWnnEvent;
-import me.blog.hgl1002.openwnn.event.SelectCandidateEvent;
 import me.blog.hgl1002.openwnn.event.UpdateCandidateEvent;
 
 import android.widget.EditText;
@@ -842,7 +840,7 @@ public class TextCandidatesViewManager implements CandidatesViewManager, Gesture
         if (mSound != null) {
             try { mSound.seekTo(0); mSound.start(); } catch (Exception ex) { }
         }
-        EventBus.getDefault().post(new SelectCandidateEvent(word));
+        //EventBus.getDefault().post(new SelectCandidateEvent(word));
     }
 
     /** @see android.view.GestureDetector.OnGestureListener#onDown */

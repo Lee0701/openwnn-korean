@@ -29,11 +29,6 @@ android {
         testImplementation 'junit:junit:4.12'
     }
 
-    externalNativeBuild {
-        ndkBuild {
-            path 'Android.mk'
-        }
-    }
 }
 repositories {
     jcenter()

@@ -31,8 +31,6 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import me.blog.hgl1002.openwnn.KOKR.CandidatesViewManagerKOKR;
-import me.blog.hgl1002.openwnn.KOKR.ComposingWord;
 import me.blog.hgl1002.openwnn.KOKR.DefaultSoftKeyboardKOKR;
 import me.blog.hgl1002.openwnn.KOKR.EngineMode;
 import me.blog.hgl1002.openwnn.KOKR.HangulEngine;
@@ -41,22 +39,10 @@ import me.blog.hgl1002.openwnn.KOKR.HangulEngine.HangulEngineEvent;
 import me.blog.hgl1002.openwnn.KOKR.HangulEngine.HangulEngineListener;
 import me.blog.hgl1002.openwnn.KOKR.HangulEngine.SetComposingEvent;
 import me.blog.hgl1002.openwnn.KOKR.preference.KeystrokePreference;
-import me.blog.hgl1002.openwnn.KOKR.layout.Layout12KeyDubul;
 import me.blog.hgl1002.openwnn.KOKR.ListLangKeyActionDialogActivity;
 import me.blog.hgl1002.openwnn.KOKR.TwelveHangulEngine;
-import me.blog.hgl1002.openwnn.KOKR.WordConverter;
-import me.blog.hgl1002.openwnn.KOKR.converter.AutoTextConverter;
-import me.blog.hgl1002.openwnn.KOKR.converter.HanjaConverter;
-import me.blog.hgl1002.openwnn.KOKR.converter.T9Converter;
-import me.blog.hgl1002.openwnn.KOKR.converter.WordCompletionConverter;
-import me.blog.hgl1002.openwnn.KOKR.trie.Dictionaries;
-import me.blog.hgl1002.openwnn.KOKR.trie.MiniPOS;
-import me.blog.hgl1002.openwnn.KOKR.trie.NativeTrieDictionary;
 
-import me.blog.hgl1002.openwnn.KOKR.trie.TrieDictionary;
-import me.blog.hgl1002.openwnn.event.AutoConvertEvent;
 import me.blog.hgl1002.openwnn.event.CommitComposingTextEvent;
-import me.blog.hgl1002.openwnn.event.DisplayCandidatesEvent;
 import me.blog.hgl1002.openwnn.event.EngineModeChangeEvent;
 import me.blog.hgl1002.openwnn.event.InputCharEvent;
 import me.blog.hgl1002.openwnn.event.InputKeyEvent;
@@ -65,7 +51,6 @@ import me.blog.hgl1002.openwnn.event.InputTimeoutEvent;
 import me.blog.hgl1002.openwnn.event.InputViewChangeEvent;
 import me.blog.hgl1002.openwnn.event.KeyUpEvent;
 import me.blog.hgl1002.openwnn.event.OpenWnnEvent;
-import me.blog.hgl1002.openwnn.event.SelectCandidateEvent;
 import me.blog.hgl1002.openwnn.event.SoftKeyFlickEvent;
 import me.blog.hgl1002.openwnn.event.SoftKeyGestureEvent;
 import me.blog.hgl1002.openwnn.event.SoftKeyLongPressEvent;
@@ -212,8 +197,6 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 	public void onCreate() {
 		super.onCreate();
 		EventBus.getDefault().register(this);
-
-		HanjaConverter.copyDatabase(this);
 
 	}
 
