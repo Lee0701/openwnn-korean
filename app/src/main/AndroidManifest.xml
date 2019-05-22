@@ -10,6 +10,7 @@
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name">
+
         <service
             android:id="@+id/openwnn_korean"
             android:name=".OpenWnnKOKR"
@@ -34,11 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".KOKR.ListLangKeyActionDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:windowSoftInputMode="stateVisible"/>
+
     </application>
 
 </manifest>

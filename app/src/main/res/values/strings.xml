@@ -512,6 +512,7 @@
   <string name="preference_system_list_actions">List Actions</string>
   <string name="preference_system_switch_kor_eng">Switch Korean/English Mode</string>
   <string name="preference_system_switch_next_method">Switch to Next Method</string>
+  <string name="preference_system_switch_method_mixed">Switch Input Methods (Mixed)</string>
   <string name="preference_system_list_methods">List Input Methods</string>
   <string name="preference_system_toggle_12key_mode">Toggle 12-Key Layout</string>
   <string name="preference_system_toggle_one_handed_mode">Toggle One-Handed Mode</string>

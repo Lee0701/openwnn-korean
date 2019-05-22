@@ -250,6 +250,7 @@
 		<item>@string/preference_system_list_actions</item>
 		<item>@string/preference_system_switch_kor_eng</item>
 		<item>@string/preference_system_switch_next_method</item>
+		<item>@string/preference_system_switch_method_mixed</item>
 		<item>@string/preference_system_list_methods</item>
 		<item>@string/preference_system_toggle_12key_mode</item>
 		<item>@string/preference_system_open_settings</item>
@@ -259,6 +260,7 @@
 		<item>list_actions</item>
 	    <item>switch_kor_eng</item>
 	    <item>switch_next_method</item>
+		<item>switch_method_mixed</item>
 	    <item>list_methods</item>
 	    <item>toggle_12key_mode</item>
 	    <item>open_settings</item>

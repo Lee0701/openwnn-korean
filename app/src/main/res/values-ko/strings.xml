@@ -252,6 +252,7 @@
     <string name="preference_system_list_actions">작업 선택 창 표시</string>
     <string name="preference_system_switch_kor_eng">한/영 전환</string>
     <string name="preference_system_switch_next_method">다음 입력기로 전환</string>
+    <string name="preference_system_switch_method_mixed">한/영 전환 + 다음 입력기로 전환 (혼합)</string>
     <string name="preference_system_list_methods">입력기 목록 표시</string>
     <string name="preference_system_toggle_12key_mode">12키/일반 배열 전환</string>
     <string name="preference_system_toggle_one_handed_mode">한 손 모드 전환</string>

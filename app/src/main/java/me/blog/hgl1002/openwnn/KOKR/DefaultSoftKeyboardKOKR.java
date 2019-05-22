@@ -867,16 +867,32 @@ public class DefaultSoftKeyboardKOKR extends DefaultSoftKeyboard {
 		}
 	}
 
-	public void nextLanguage() {
-		int language = mCurrentLanguage;
+	public int getLanguageId() {
+		return mCurrentLanguageIndex;
+	}
 
-		if(++mCurrentLanguageIndex >= mLanguageCycleTable.length) mCurrentLanguageIndex = 0;
-		language = mLanguageCycleTable[mCurrentLanguageIndex];
-
-		mCurrentLanguage = language;
-
+	public void setLanguage(int languageId) {
+		mCurrentLanguageIndex = languageId;
+		mCurrentLanguage = mLanguageCycleTable[languageId];
 		changeKeyMode(KEYMODE_HANGUL);
+	}
 
+	public void nextLanguage() {
+		if(++mCurrentLanguageIndex >= mLanguageCycleTable.length) mCurrentLanguageIndex = 0;
+		setLanguage(mCurrentLanguageIndex);
+	}
+
+	public void previousLanguage() {
+		if(--mCurrentLanguageIndex < 0) mCurrentLanguageIndex = mLanguageCycleTable.length-1;
+		setLanguage(mCurrentLanguageIndex);
+	}
+
+	public boolean isLastLanguage() {
+		return mCurrentLanguageIndex == mLanguageCycleTable.length-1;
+	}
+
+	public boolean isFirstLanguage() {
+		return mCurrentLanguageIndex == 0;
 	}
 
 	public void setShiftState(int shiftState) {
