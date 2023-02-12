@@ -3,8 +3,7 @@
     android:versionCode="19030902"
     android:versionName="190309-02">
 
-    <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
-        android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:icon="@drawable/icon"
@@ -14,7 +13,8 @@
             android:id="@+id/openwnn_korean"
             android:name=".OpenWnnKOKR"
             android:label="@string/ime_name"
-            android:permission="android.permission.BIND_INPUT_METHOD">
+            android:permission="android.permission.BIND_INPUT_METHOD"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
@@ -27,7 +27,8 @@
         <activity
             android:name=".OpenWnnControlPanelKOKR"
             android:label="@string/preference_ime_setting_app"
-            android:taskAffinity="">
+            android:taskAffinity=""
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
