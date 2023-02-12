@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.blog.hgl1002.openwnn"
     android:versionCode="19030902"
     android:versionName="190309-02">
 

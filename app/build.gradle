@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "me.blog.hgl1002.openwnn"
@@ -20,14 +19,15 @@ android {
         }
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-    }
 
     dependencies {
         implementation 'org.greenrobot:eventbus:3.1.1'
         testImplementation 'junit:junit:4.12'
     }
+    lint {
+        disable 'MissingTranslation'
+    }
+    namespace 'me.blog.hgl1002.openwnn'
 
 }
 repositories {
