@@ -533,8 +533,19 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 			if (keyEvent.getRepeatCount() == 0) {
 				if (++mHardAlt > 2) { mHardAlt = 0; }
 			}
-			mAltPressing   = true;
+			mAltPressing = true;
 			updateMetaKeyStateDisplay();
+			return;
+
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+		case KeyEvent.KEYCODE_DPAD_UP:
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+			if(mHardShift > 0) {
+				resetHardShift(true);
+				updateMetaKeyStateDisplay();
+				updateNumKeyboardShiftState();
+			}
 			return;
 
 		case KeyEvent.KEYCODE_SHIFT_LEFT:
@@ -631,6 +642,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 			shinShift();
 			return;
 		}
+        System.out.println();
 		boolean ret = processKeyEvent(keyEvent);
 		if(!ret && mInputConnection != null) {
 			int c = keyEvent.getKeyCode();
@@ -805,58 +817,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 		if(mInputConnection == null) return false;
 		int key = ev.getKeyCode();
 
-		if (ev.isShiftPressed()) {
-			switch (key) {
-			case KeyEvent.KEYCODE_DPAD_UP:
-			case KeyEvent.KEYCODE_DPAD_DOWN:
-			case KeyEvent.KEYCODE_DPAD_LEFT:
-			case KeyEvent.KEYCODE_DPAD_RIGHT:
-				if (!mSelectionMode) {
-					mSelectionEnd = mInputConnection.getTextBeforeCursor(Integer.MAX_VALUE, 0).length();
-					mSelectionStart = mSelectionEnd;
-					mSelectionMode = true;
-				} else {
-					if (key == KeyEvent.KEYCODE_DPAD_LEFT) mSelectionEnd--;
-					if (key == KeyEvent.KEYCODE_DPAD_RIGHT) mSelectionEnd++;
-					if (key == KeyEvent.KEYCODE_DPAD_UP) {
-						int i = 1;
-						CharSequence text = "";
-						boolean end;
-						while(!(end = mInputConnection.getTextBeforeCursor(i, 0).equals(text)) && (text = mInputConnection.getTextBeforeCursor(i, 0)).charAt(0) != '\n') i++;
-						if(end) mSelectionEnd -= mInputConnection.getTextBeforeCursor(Integer.MAX_VALUE, 0).length();
-						else mSelectionEnd -= i;
-					}
-					if (key == KeyEvent.KEYCODE_DPAD_DOWN) {
-						int i = 1;
-						CharSequence text = "";
-						boolean end;
-						while(!(end = mInputConnection.getTextAfterCursor(i, 0).equals(text)) && (text = mInputConnection.getTextAfterCursor(i, 0)).charAt(text.length()-1) != '\n') i++;
-						if(end) mSelectionEnd += mInputConnection.getTextAfterCursor(Character.MAX_VALUE, 0).length();
-						else mSelectionEnd += i;
-					}
-					int start = mSelectionStart, end = mSelectionEnd;
-					if (mSelectionStart > mSelectionEnd) {
-							start = mSelectionEnd;
-							end = mSelectionStart;
-						}
-					mInputConnection.setSelection(start, end);
-					mHardShift = 0;
-					updateMetaKeyStateDisplay();
-					updateNumKeyboardShiftState();
-				}
-				return true;
-
-			default:
-				mSelectionMode = false;
-				break;
-			}
-		} else {
-			mSelectionMode = false;
-		}
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			if (ev.isCtrlPressed()) return false;
-		}
+        if (ev.isCtrlPressed()) return false;
 
 		if ((key <= -200 && key > -300) || (key <= -2000 && key > -3000)) {
 			int jamo = mHangulEngine.inputCode(key, mHardShift);
@@ -871,7 +832,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 					}
 				}
 				if (mHangulEngine.inputJamo(jamo) == 0) {
-					mInputConnection.commitText(new String(new char[] {(char) jamo}), 1);
+					mInputConnection.commitText(String.valueOf((char) jamo), 1);
 					resetCharComposition();
 				}
 			}
@@ -894,12 +855,17 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
 				resetCharComposition();
 				((DefaultSoftKeyboardKOKR) mInputViewManager).nextLanguage();
+
 				mHardShift = 0;
 				mShiftPressing = false;
+				mInputConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT));
 				mHardAlt = 0;
 				mAltPressing = false;
+				mInputConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ALT_LEFT));
+
 				updateMetaKeyStateDisplay();
 				updateNumKeyboardShiftState();
+
 				return true;
 			}
 		}
