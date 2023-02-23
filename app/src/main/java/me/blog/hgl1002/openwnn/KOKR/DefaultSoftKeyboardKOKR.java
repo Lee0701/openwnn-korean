@@ -374,45 +374,29 @@ public class DefaultSoftKeyboardKOKR extends DefaultSoftKeyboard {
 	class OnKeyboardViewTouchListener implements View.OnTouchListener {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			if(Build.VERSION.SDK_INT >= 8) {
-				int pointerIndex = event.getActionIndex();
-				int pointerId = event.getPointerId(pointerIndex);
-				int action = event.getActionMasked();
-				float x = event.getX(pointerIndex), y = event.getY(pointerIndex);
-				switch(action) {
-				case MotionEvent.ACTION_DOWN:
-				case MotionEvent.ACTION_POINTER_DOWN:
-					TouchPoint point = new TouchPoint(findKey(mCurrentKeyboard, (int) x, (int) y), x, y);
-					mTouchPoints.put(pointerId, point);
-					return true;
+			int pointerIndex = event.getActionIndex();
+			int pointerId = event.getPointerId(pointerIndex);
+			int action = event.getActionMasked();
+			float x = event.getX(pointerIndex), y = event.getY(pointerIndex);
+			TouchPoint point = mTouchPoints.get(pointerId);
+			switch(action) {
+			case MotionEvent.ACTION_DOWN:
+			case MotionEvent.ACTION_POINTER_DOWN:
+				Keyboard.Key key = findKey(mCurrentKeyboard, (int) x, (int) y);
+				if(key == null) return true;
+				point = new TouchPoint(key, x, y);
+				mTouchPoints.put(pointerId, point);
+				return true;
 
-				case MotionEvent.ACTION_MOVE:
-					return mTouchPoints.get(pointerId).onMove(x, y);
+			case MotionEvent.ACTION_MOVE:
+				return point.onMove(x, y);
 
-				case MotionEvent.ACTION_UP:
-				case MotionEvent.ACTION_POINTER_UP:
-					mTouchPoints.get(pointerId).onUp();
-					mTouchPoints.remove(pointerId);
-					return true;
+			case MotionEvent.ACTION_UP:
+			case MotionEvent.ACTION_POINTER_UP:
+				point.onUp();
+				mTouchPoints.remove(pointerId);
+				return true;
 
-				}
-			} else {
-				float x = event.getX(), y = event.getY();
-				switch(event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					TouchPoint point = new TouchPoint(findKey(mCurrentKeyboard, (int) x, (int) y), x, y);
-					mTouchPoints.put(0, point);
-					return true;
-
-				case MotionEvent.ACTION_MOVE:
-					return mTouchPoints.get(0).onMove(x, y);
-
-				case MotionEvent.ACTION_UP:
-					mTouchPoints.get(0).onUp();
-					mTouchPoints.remove(0);
-					return true;
-
-				}
 			}
 			return false;
 		}
