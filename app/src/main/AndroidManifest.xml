@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.blog.hgl1002.openwnn"
     android:versionCode="19030902"
     android:versionName="190309-02">
 
-    <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
-        android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:icon="@drawable/icon"
@@ -14,6 +12,7 @@
             android:id="@+id/openwnn_korean"
             android:name=".OpenWnnKOKR"
             android:label="@string/ime_name"
+            android:exported="true"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
@@ -27,6 +26,7 @@
         <activity
             android:name=".OpenWnnControlPanelKOKR"
             android:label="@string/preference_ime_setting_app"
+            android:exported="true"
             android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

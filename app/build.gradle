@@ -1,16 +1,18 @@
 apply plugin: 'com.android.application'
+apply plugin: 'de.mannodermaus.android-junit5'
+
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.1'
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "me.blog.hgl1002.openwnn"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 33
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -20,28 +22,24 @@ android {
         }
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-    }
 
     dependencies {
         implementation 'org.greenrobot:eventbus:3.1.1'
-        testImplementation 'junit:junit:4.12'
+        implementation 'androidx.recyclerview:recyclerview:1.3.0'
+        testImplementation 'junit:junit:4.13.2'
+        androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+        androidTestImplementation "androidx.test:runner:1.5.2"
+        androidTestImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
     }
+    lint {
+        disable 'MissingTranslation'
+    }
+    namespace 'me.blog.hgl1002.openwnn'
 
-    externalNativeBuild {
-        ndkBuild {
-            path 'Android.mk'
-        }
-    }
 }
+
 repositories {
-    jcenter()
-    maven {
-        url "https://maven.google.com"
-    }
-}
-
-dependencies {
-    implementation 'com.android.support:recyclerview-v7:28.0.0-alpha1'
+    mavenCentral()
+    google()
 }
