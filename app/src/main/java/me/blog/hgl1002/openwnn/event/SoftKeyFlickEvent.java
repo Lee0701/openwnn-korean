@@ -1,6 +1,6 @@
 package me.blog.hgl1002.openwnn.event;
 
-public class SoftKeyFlickEvent extends OpenWnnEvent {
+public class SoftKeyFlickEvent extends SebeolHangulIMEEvent {
 
 	private int keyCode;
 	private Direction direction;

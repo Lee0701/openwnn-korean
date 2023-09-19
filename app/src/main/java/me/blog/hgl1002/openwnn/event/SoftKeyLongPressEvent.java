@@ -1,6 +1,6 @@
 package me.blog.hgl1002.openwnn.event;
 
-public class SoftKeyLongPressEvent extends OpenWnnEvent {
+public class SoftKeyLongPressEvent extends SebeolHangulIMEEvent {
 
 	private int keyCode;
 
