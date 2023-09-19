@@ -1,8 +1,8 @@
 package me.blog.hgl1002.openwnn.event;
 
-import me.blog.hgl1002.openwnn.KOKR.EngineMode;
+import me.blog.hgl1002.openwnn.hangul.EngineMode;
 
-public class EngineModeChangeEvent extends OpenWnnEvent {
+public class EngineModeChangeEvent extends SebeolHangulIMEEvent {
 
 	EngineMode engineMode;
 

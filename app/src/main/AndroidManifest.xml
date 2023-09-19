@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="23021300"
-    android:versionName="230213-00">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -10,8 +8,7 @@
         android:label="@string/app_name">
 
         <service
-            android:id="@+id/openwnn_korean"
-            android:name=".OpenWnnKOKR"
+            android:name=".SebeolHangulIME"
             android:label="@string/ime_name"
             android:permission="android.permission.BIND_INPUT_METHOD"
             android:exported="true">
@@ -25,22 +22,21 @@
         </service>
 
         <activity
-            android:name=".OpenWnnControlPanelKOKR"
+            android:name=".SebeolHangulIMEControlPanel"
             android:label="@string/preference_ime_setting_app"
             android:taskAffinity=""
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".KOKR.ListLangKeyActionDialogActivity"
+        <activity android:name=".view.ListLangKeyActionDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
-            android:windowSoftInputMode="stateVisible"/>
+            android:windowSoftInputMode="stateVisible" />
 
     </application>
 

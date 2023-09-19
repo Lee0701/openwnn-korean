@@ -35,21 +35,21 @@ public interface InputViewManager {
      *
      * @return      The input view created in the initialize process; {@code null} if cannot create a input view.
      */
-    public View initView(OpenWnn parent, int width, int height);
+    View initView(SebeolHangulIME parent, int width, int height);
 
     /**
      * Get the input view being used currently.
      *
      * @return  The input view; {@code null} if no input view is used currently.
      */
-    public View getCurrentView();
+    View getCurrentView();
 
     /**
      * Notification of updating parent's state.
      *
      * @param parent    The OpenWnn object using this manager
      */
-    public void onUpdateState(OpenWnn parent);
+    void onUpdateState(SebeolHangulIME parent);
 
     /**
      * Reflect the preferences in the input view.
@@ -57,10 +57,10 @@ public interface InputViewManager {
      * @param pref    The preferences
      * @param editor  The information about the editor
      */
-    public void setPreferences(SharedPreferences pref, EditorInfo editor);
+    void setPreferences(SharedPreferences pref, EditorInfo editor);
 
     /**
      * Close the input view.
      */
-    public void closing();
+    void closing();
 }

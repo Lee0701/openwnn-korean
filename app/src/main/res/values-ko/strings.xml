@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- common part -->
 
-    <string name="preference_ime_setting_app">OpenWnn 설정</string>
+    <string name="app_name">세벌식 한글 입력기</string>
+    <string name="ime_name">세벌식 한글 입력기</string>
+
+
+    <string name="preference_ime_setting_app">세벌식 한글 입력기 설정</string>
 
     <!-- Dialog Messages -->
     <string name="dialog_button_ok">확인</string>
@@ -12,7 +17,7 @@
     <string name="preference_method_setting_menu">입력 방식</string>
     
     <string name="preference_method_enabler_title">입력 방식 활성화 창 열기</string>
-    <string name="preference_method_enabler_summary">\'OpenWnn Korean\'을 활성화해 주세요.</string>
+    <string name="preference_method_enabler_summary">\'세벌식 한글 입력기\'를 활성화해 주세요.</string>
     <string name="preference_method_picker_title">입력 방식 선택 창 열기</string>
 
     <string name="preference_appearance_setting_menu">키보드 모양</string>
@@ -269,5 +274,12 @@
     <string name="preference_aboutime_menu">IME 정보</string>
 
     <string name="initial_launch_help">ALT키를 길게 누르면 설정을 열 수 있습니다.</string>
+
+    <!-- OpenWnn Korean -->
+    <string name="sebeol_hangul_ime_copyright">hgl1002@naver.com</string>
+    <string name="sebeol_hangul_ime">세벌식 한글 입력기</string>
+
+    <string name="openwnn_korean_donate_title">앱 후원</string>
+    <string name="openwnn_korean_donate_summary">개발을 계속할 수 있도록 후원해 주시면 정말 감사하겠습니다. 후원 문의는 hgl1002@naver.com으로 부탁드립니다.</string>
 
 </resources>

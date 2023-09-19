@@ -1,11 +1,14 @@
 apply plugin: 'com.android.application'
 android {
+    namespace 'me.blog.hgl1002.openwnn'
     compileSdk 34
 
     defaultConfig {
         applicationId "me.blog.hgl1002.openwnn"
         minSdk 14
         targetSdk 34
+        versionCode 23021300
+        versionName "230213-00"
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
@@ -19,23 +22,11 @@ android {
         }
     }
 
-
     dependencies {
         implementation 'org.greenrobot:eventbus:3.1.1'
         testImplementation 'junit:junit:4.13.2'
     }
-    lint {
-        disable 'MissingTranslation'
-    }
-    namespace 'me.blog.hgl1002.openwnn'
-
-}
-repositories {
-    maven {
-        url "https://maven.google.com"
-    }
 }
 
 dependencies {
-    implementation 'androidx.recyclerview:recyclerview:1.3.1'
 }

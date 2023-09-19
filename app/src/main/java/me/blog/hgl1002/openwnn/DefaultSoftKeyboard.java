@@ -21,8 +21,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
-import me.blog.hgl1002.openwnn.event.OpenWnnEvent;
-
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.content.SharedPreferences;
@@ -143,7 +141,7 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
     public static final int KEYCODE_QWERTY_PINYIN  = -115;
     
     /** OpenWnn instance which hold this software keyboard*/
-    protected OpenWnn      mWnn;
+    protected SebeolHangulIME mIME;
     
     /** Current keyboard view */
     protected KeyboardView mKeyboardView;
@@ -295,7 +293,7 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
      *
      * @param parent   OpenWnn using the keyboards.
      */
-    protected void createKeyboards(OpenWnn parent) {
+    protected void createKeyboards(SebeolHangulIME parent) {
         /*
          *  Keyboard[# of Languages][portrait/landscape][# of keyboard type]
          *          [shift off/on][max # of key-modes][non-input/input]
@@ -519,8 +517,8 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
         }
     }
     /** @see me.blog.hgl1002.openwnn.InputViewManager#initView */
-    public View initView(OpenWnn parent, int width, int height) {
-        mWnn = parent;
+    public View initView(SebeolHangulIME parent, int width, int height) {
+        mIME = parent;
         mDisplayMode = 
             (parent.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             ? LANDSCAPE : PORTRAIT;
@@ -534,10 +532,10 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(parent);
         String skin = pref.getString("keyboard_skin",
-                                     mWnn.getResources().getString(R.string.keyboard_skin_id_default));
+                                     mIME.getResources().getString(R.string.keyboard_skin_id_default));
         int id = parent.getResources().getIdentifier(skin, "layout", "me.blog.hgl1002.openwnn");
 
-        mKeyboardView = (KeyboardView) mWnn.getLayoutInflater().inflate(id, null);
+        mKeyboardView = (KeyboardView) mIME.getLayoutInflater().inflate(id, null);
         mKeyboardView.setOnKeyboardActionListener(this);
         mCurrentKeyboard = null;
 
@@ -558,7 +556,7 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
      * @param mode  The state of SHIFT/ALT keys.
      */
     public void updateIndicator(int mode) {
-        Resources res = mWnn.getResources();
+        Resources res = mIME.getResources();
         TextView text1 = (TextView)mSubView.findViewById(R.id.shift);
         TextView text2 = (TextView)mSubView.findViewById(R.id.alt);
 
@@ -636,29 +634,7 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
     }
 
     /** @see me.blog.hgl1002.openwnn.InputViewManager#onUpdateState */
-    public void onUpdateState(OpenWnn parent) {
-        try {
-            if (parent.mComposingText.size(1) == 0) {
-                if (!mNoInput) {
-                    /* when the mode changed to "no input" */
-                    mNoInput = true;
-                    Keyboard newKeyboard = getKeyboardInputed(false);
-                    if (mCurrentKeyboard != newKeyboard) {
-                        changeKeyboard(newKeyboard);
-                    }
-                }
-            } else {
-                if (mNoInput) {
-                    /* when the mode changed to "input some characters" */
-                    mNoInput = false;
-                    Keyboard newKeyboard = getKeyboardInputed(true);
-                    if (mCurrentKeyboard != newKeyboard) {
-                        changeKeyboard(newKeyboard);
-                    }
-                }
-            }
-        } catch (Exception ex) {
-        }
+    public void onUpdateState(SebeolHangulIME parent) {
     }
 
     /** @see me.blog.hgl1002.openwnn.InputViewManager#setPreferences */
@@ -667,23 +643,23 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
         /* vibrator */
         try {
             if (pref.getBoolean("key_vibration", false)) {
-                mVibrator = (Vibrator)mWnn.getSystemService(Context.VIBRATOR_SERVICE);
+                mVibrator = (Vibrator) mIME.getSystemService(Context.VIBRATOR_SERVICE);
             } else {
                 mVibrator = null;
             }
         } catch (Exception ex) {
-            Log.d("OpenWnn", "NO VIBRATOR");
+            Log.d("SebeolHangulIME", "NO VIBRATOR");
         }
 
         /* sound */
         try {
             if (pref.getBoolean("key_sound", false)) {
-                mSound = MediaPlayer.create(mWnn, R.raw.type);
+                mSound = MediaPlayer.create(mIME, R.raw.type);
             } else {
                 mSound = null;
             }
         } catch (Exception ex) {
-            Log.d("OpenWnn", "NO SOUND");
+            Log.d("SebeolHangulIME", "NO SOUND");
         }
 
         /* pop-up preview */

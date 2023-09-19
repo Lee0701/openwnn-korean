@@ -2,7 +2,7 @@ package me.blog.hgl1002.openwnn.event;
 
 import android.view.KeyEvent;
 
-public class KeyUpEvent extends OpenWnnEvent {
+public class KeyUpEvent extends SebeolHangulIMEEvent {
 
 	private KeyEvent keyEvent;
 
