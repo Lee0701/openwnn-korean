@@ -6,6 +6,8 @@ android {
         applicationId "me.blog.hgl1002.openwnn"
         minSdk 14
         targetSdk 34
+        versionCode 23021300
+        versionName "230213-00"
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
