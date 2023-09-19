@@ -1225,10 +1225,10 @@ public class DefaultSoftKeyboardKOKR extends DefaultSoftKeyboard {
 		}
 		for(Keyboard.Key key : kbd.getKeys()) {
 			boolean found = false;
-			for(int i = 0 ; i < layout.length ; i++) {
+			for(int[] item : layout) {
 				if(key.codes[0] == 128) break;
-				if(key.codes[0] == layout[i][0]) {
-					int code = layout[i][mShiftOn + 1] & 0xffff;
+				if(key.codes[0] == item[0]) {
+					int code = item[mShiftOn + 1] & 0xffff;
 					String label = getKeyLabel(code, false);
 					if(label != null) key.label = label;
 					found = true;
@@ -1260,6 +1260,9 @@ public class DefaultSoftKeyboardKOKR extends DefaultSoftKeyboard {
 						}
 					}
 				}
+				if(code >= 0x1100 && code <= 0x1112) code = HangulEngine.CHO_TABLE[code - 0x1100];
+				else if(code >= 0x1161 && code <= 0x1175) code = HangulEngine.JUNG_TABLE[code - 0x1161];
+				else if(code >= 0x11a8 && code <= 0x11c2) code = HangulEngine.JONG_TABLE[code - 0x11a8 + 1];
 				return String.valueOf(Character.toChars(code));
 			}
 			else return null;
