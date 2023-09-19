@@ -1074,10 +1074,7 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 		InputKeyEvent inputKeyEvent = new InputKeyEvent(event);
 		EventBus.getDefault().post(inputKeyEvent);
 		mConsumeDownEvent = inputKeyEvent.isCancelled();
-		if(!mConsumeDownEvent) {
-			return super.onKeyDown(keyCode, event);
-		}
-		return super.onKeyDown(keyCode, event);
+		return mConsumeDownEvent || super.onKeyDown(keyCode, event);
 	}
 
 	@Override
