@@ -238,7 +238,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
         mAltDirect = pref.getBoolean("hardware_alt_direct", true);
 
-		mLastLanguage = pref.getInt("misc_last_language", mLastLanguage);
+    	mLastLanguage = pref.getInt("misc_last_language", mLastLanguage);
 
 		if (mInputViewManager != null) {
 			WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
@@ -283,14 +283,6 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
 	@Override
 	public View onCreateCandidatesView() {
-		if (mCandidatesViewManager != null) {
-			WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
-			assert wm != null;
-			return mCandidatesViewManager.initView(this,
-					wm.getDefaultDisplay().getWidth(),
-					wm.getDefaultDisplay().getHeight());
-		}
-
 		return super.onCreateCandidatesView();
 	}
 

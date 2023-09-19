@@ -39,16 +39,8 @@ import me.blog.hgl1002.openwnn.event.OpenWnnEvent;
  */
 public class OpenWnn extends InputMethodService {
 
-    /** Candidate view */
-    protected CandidatesViewManager  mCandidatesViewManager = null;
     /** Input view (software keyboard) */
     protected InputViewManager  mInputViewManager = null;
-    /** Conversion engine */
-    protected WnnEngine  mConverter = null;
-    /** Pre-converter (for Romaji-to-Kana input, Hangul input, etc.) */
-    protected LetterConverter  mPreConverter = null;
-    /** The inputing/editing string */
-    protected ComposingText  mComposingText = null;
     /** The input connection */
     protected InputConnection mInputConnection = null;
     /** Auto hide candidate view */
@@ -72,26 +64,12 @@ public class OpenWnn extends InputMethodService {
     /** @see android.inputmethodservice.InputMethodService#onCreate */
     @Override public void onCreate() {
         super.onCreate();
-
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-
-
-        if (mConverter != null) { mConverter.init(); }
-        if (mComposingText != null) { mComposingText.clear(); }
     }
 
     /** @see android.inputmethodservice.InputMethodService#onCreateCandidatesView */
     @Override public View onCreateCandidatesView() {
-        if (mCandidatesViewManager != null) {
-            WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
-            View view = mCandidatesViewManager.initView(this,
-                                                        wm.getDefaultDisplay().getWidth(),
-                                                        wm.getDefaultDisplay().getHeight());
-            mCandidatesViewManager.setViewType(CandidatesViewManager.VIEW_TYPE_NORMAL);
-            return view;
-        } else {
-            return super.onCreateCandidatesView();
-        }
+        return super.onCreateCandidatesView();
     }
 
     /** @see android.inputmethodservice.InputMethodService#onCreateInputView */
@@ -120,9 +98,6 @@ public class OpenWnn extends InputMethodService {
     @Override public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
         mInputConnection = getCurrentInputConnection();
-        if (!restarting && mComposingText != null) {
-            mComposingText.clear();
-        }
     }
 
     /** @see android.inputmethodservice.InputMethodService#onStartInputView */
@@ -133,15 +108,11 @@ public class OpenWnn extends InputMethodService {
         setCandidatesViewShown(false);
         if (mInputConnection != null) {
             mDirectInputMode = false;
-            if (mConverter != null) { mConverter.init(); }
         } else {
             mDirectInputMode = true;
         }
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        if (mCandidatesViewManager != null) { mCandidatesViewManager.setPreferences(pref);  }
         if (mInputViewManager != null) { mInputViewManager.setPreferences(pref, attribute);  }
-        if (mPreConverter != null) { mPreConverter.setPreferences(pref);  }
-        if (mConverter != null) { mConverter.setPreferences(pref);  }
     }
 
     /** @see android.inputmethodservice.InputMethodService#requestHideSelf */
@@ -245,6 +216,5 @@ public class OpenWnn extends InputMethodService {
      * Processing of resource open when IME ends.
      */
     protected void close() {
-        if (mConverter != null) { mConverter.close(); }
     }
 }

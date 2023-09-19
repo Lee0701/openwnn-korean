@@ -637,28 +637,6 @@ public class DefaultSoftKeyboard implements InputViewManager, KeyboardView.OnKey
 
     /** @see me.blog.hgl1002.openwnn.InputViewManager#onUpdateState */
     public void onUpdateState(OpenWnn parent) {
-        try {
-            if (parent.mComposingText.size(1) == 0) {
-                if (!mNoInput) {
-                    /* when the mode changed to "no input" */
-                    mNoInput = true;
-                    Keyboard newKeyboard = getKeyboardInputed(false);
-                    if (mCurrentKeyboard != newKeyboard) {
-                        changeKeyboard(newKeyboard);
-                    }
-                }
-            } else {
-                if (mNoInput) {
-                    /* when the mode changed to "input some characters" */
-                    mNoInput = false;
-                    Keyboard newKeyboard = getKeyboardInputed(true);
-                    if (mCurrentKeyboard != newKeyboard) {
-                        changeKeyboard(newKeyboard);
-                    }
-                }
-            }
-        } catch (Exception ex) {
-        }
     }
 
     /** @see me.blog.hgl1002.openwnn.InputViewManager#setPreferences */
