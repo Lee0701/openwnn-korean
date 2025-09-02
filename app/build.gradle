@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 android {
     namespace 'me.blog.hgl1002.openwnn'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "me.blog.hgl1002.openwnn"
         minSdk 14
-        targetSdk 34
+        targetSdk 36
         versionCode 23091901
         versionName "230919-01"
         compileOptions {
@@ -23,7 +23,7 @@ android {
     }
 
     dependencies {
-        implementation 'org.greenrobot:eventbus:3.1.1'
+        implementation 'org.greenrobot:eventbus:3.3.1'
         testImplementation 'junit:junit:4.13.2'
     }
 }
