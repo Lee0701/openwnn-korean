@@ -1,9 +1,10 @@
 package me.blog.hgl1002.openwnn.preference;
 
 import android.content.Context;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.widget.Toast;
+
+import androidx.preference.Preference;
 
 import me.blog.hgl1002.openwnn.R;
 

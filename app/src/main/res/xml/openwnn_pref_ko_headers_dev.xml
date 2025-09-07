@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
-	<header
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$InputMethodFragment"
 		android:title="@string/preference_method_setting_menu" />
-	<header
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$KeyboardAppearanceFragment"
 		android:title="@string/preference_appearance_setting_menu" />
-	<header
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$SoftKeyboardFragment"
 		android:title="@string/preference_key_setting_menu" />
-	<header
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$HardKeyboardFragment"
 		android:title="@string/preference_hardware_setting_menu" />
-	<header
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$SystemFragment"
 		android:title="@string/preference_system_setting_menu" />
-	<header
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$AboutFragment"
 		android:title="@string/preference_aboutime_menu" />
-	<header
+	<Preference
 		android:fragment="me.blog.hgl1002.openwnn.SebeolHangulIMEControlPanel$DeveloperFragment"
 		android:title="@string/preference_dev_menu" />
 
-</preference-headers>
+</PreferenceScreen>

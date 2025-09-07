@@ -2,9 +2,10 @@ package me.blog.hgl1002.openwnn.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.ListPreference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
+
+import androidx.preference.ListPreference;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,30 +20,30 @@ public class SoftLayoutPreference extends ListPreference {
 		super(context, attrs);
 
 		key = attrs.getAttributeValue(null, "layoutKey");
-
 	}
 
 	@Override
-	protected void onDialogClosed(boolean positiveResult) {
-		super.onDialogClosed(positiveResult);
-		if (positiveResult) {
-			EventBus.getDefault().post(new InputViewChangeEvent());
-		}
-	}
-
-	@Override
-	protected View onCreateDialogView() {
-
+	protected void onClick() {
 		SharedPreferences pref = getPreferenceManager().getSharedPreferences();
-
-		this.setValue(pref.getString(this.getKey(), this.getValue()));
 
 		if(key != null) {
 			String layout = pref.getString(key, "");
 			setEntries(getEntries(layout));
 			setEntryValues(getEntryValues(layout));
 		}
-		return super.onCreateDialogView();
+
+		this.setValue(pref.getString(this.getKey(), this.getValue()));
+
+		super.onClick();
+	}
+
+	@Override
+	public void setValue(String value) {
+		boolean changed = getValue() != null && !TextUtils.equals(value, getValue());
+		super.setValue(value);
+		if(changed) {
+			EventBus.getDefault().post(new InputViewChangeEvent());
+		}
 	}
 
 	public static int getEntries(String layout) {

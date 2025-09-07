@@ -1,8 +1,9 @@
 package me.blog.hgl1002.openwnn.preference;
 
 import android.content.Context;
-import android.preference.EditTextPreference;
 import android.util.AttributeSet;
+
+import androidx.preference.EditTextPreference;
 
 public class IntEditTextPreference extends EditTextPreference {
 

@@ -1,12 +1,10 @@
 package me.blog.hgl1002.openwnn.preference;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.preference.Preference;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,11 +29,6 @@ public class KeystrokePreference extends Preference {
 
 	public KeystrokePreference(Context context) {
 		super(context);
-	}
-
-	@Override
-	protected View onCreateView(ViewGroup parent) {
-		return super.onCreateView(parent);
 	}
 
 	@Override
