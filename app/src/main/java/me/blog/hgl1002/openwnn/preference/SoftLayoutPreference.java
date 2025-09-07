@@ -2,6 +2,7 @@ package me.blog.hgl1002.openwnn.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import androidx.preference.ListPreference;
@@ -37,10 +38,12 @@ public class SoftLayoutPreference extends ListPreference {
 	}
 
 	@Override
-	protected boolean persistString(String value) {
-		boolean result = super.persistString(value);
-		EventBus.getDefault().post(new InputViewChangeEvent());
-		return result;
+	public void setValue(String value) {
+		boolean changed = getValue() != null && !TextUtils.equals(value, getValue());
+		super.setValue(value);
+		if(changed) {
+			EventBus.getDefault().post(new InputViewChangeEvent());
+		}
 	}
 
 	public static int getEntries(String layout) {

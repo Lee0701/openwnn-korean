@@ -18,6 +18,7 @@ package me.blog.hgl1002.openwnn.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import androidx.preference.ListPreference;
@@ -41,25 +42,20 @@ public class KeyboardListPreferenceKOKR extends ListPreference {
         String key = attrs.getAttributeValue(null, "softLayoutKey");
         if(key != null) keys = key.split(",");
     }
-    
-    public KeyboardListPreferenceKOKR(Context context) {
-        this(context, null);
-    }
 
 	@Override
-	protected boolean persistString(String value) {
-		boolean result = super.persistString(value);
-
-		if(keys != null) {
-			SharedPreferences pref = getPreferenceManager().getSharedPreferences();
-			SharedPreferences.Editor editor = pref.edit();
-			String newValue = getContext().getResources().getStringArray(SoftLayoutPreference.getEntryValues(pref.getString(this.getKey(), "")))[0];
-			for(String key : keys) editor.putString(key, newValue);
-			editor.commit();
+	public void setValue(String value) {
+		boolean changed = getValue() != null && !TextUtils.equals(value, getValue());
+		super.setValue(value);
+		if(changed) {
+			if(keys != null) {
+				SharedPreferences pref = getPreferenceManager().getSharedPreferences();
+				SharedPreferences.Editor editor = pref.edit();
+				String newValue = getContext().getResources().getStringArray(SoftLayoutPreference.getEntryValues(pref.getString(this.getKey(), "")))[0];
+				for(String key : keys) editor.putString(key, newValue);
+				editor.commit();
+			}
+			EventBus.getDefault().post(new InputViewChangeEvent());
 		}
-		EventBus.getDefault().post(new InputViewChangeEvent());
-
-		return result;
 	}
-
 }
