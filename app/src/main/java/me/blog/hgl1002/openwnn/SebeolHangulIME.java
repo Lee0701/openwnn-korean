@@ -1,11 +1,13 @@
 package me.blog.hgl1002.openwnn;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.inputmethodservice.InputMethodService;
+import android.inputmethodservice.KeyboardView;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.text.method.MetaKeyKeyListener;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -250,14 +253,17 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 		if (mInputViewManager != null) {
 			WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
 			assert wm != null;
-			return mInputViewManager.initView(this,
+			View view = mInputViewManager.initView(this,
 					wm.getDefaultDisplay().getWidth(),
 					wm.getDefaultDisplay().getHeight());
 
+			view.setFitsSystemWindows(true);
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) updateNavigationBar();
+
+			return view;
 		} else {
 			return super.onCreateInputView();
 		}
-
 	}
 
 	@Override
@@ -1060,6 +1066,23 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 	@Override public void onComputeInsets(InputMethodService.Insets outInsets) {
 		super.onComputeInsets(outInsets);
 		outInsets.contentTopInsets = outInsets.visibleTopInsets;
+	}
+
+	@TargetApi(Build.VERSION_CODES.R)
+    private void updateNavigationBar() {
+		// Create a keyboard view to get background color
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		String skin = pref.getString("keyboard_skin", getResources().getString(R.string.keyboard_skin_id_default));
+		int id = getResources().getIdentifier("keyboard_" + skin, "layout", getPackageName());
+		if(id == 0) id = R.layout.keyboard_white;
+		KeyboardView keyboardView = (KeyboardView) getLayoutInflater().inflate(id, null);
+
+		getWindow().getWindow().getDecorView().setOnApplyWindowInsetsListener((view, insets) -> {
+			android.graphics.Insets statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars());
+			view.setBackground(keyboardView.getBackground());
+			view.setPadding(0, statusBarInsets.top, 0, 0);
+			return insets;
+		});
 	}
 
 	@Override
