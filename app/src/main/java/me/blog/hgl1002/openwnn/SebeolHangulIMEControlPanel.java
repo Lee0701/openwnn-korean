@@ -3,18 +3,20 @@ package me.blog.hgl1002.openwnn;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-public class SebeolHangulIMEControlPanel extends AppCompatActivity {
+public class SebeolHangulIMEControlPanel extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,10 +25,14 @@ public class SebeolHangulIMEControlPanel extends AppCompatActivity {
 		}
 		setContentView(R.layout.activity_settings);
 		if(savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
+			getSupportFragmentManager()
+					.beginTransaction()
 					.replace(R.id.frame_layout, new HeadersFragment())
 					.commit();
 		}
+		getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(getSupportFragmentManager().getBackStackEntryCount() != 0);
+		});
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.frame_layout), (OnApplyWindowInsetsListener) (view, windowInsets) -> {
 			Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
 			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
@@ -38,6 +44,30 @@ public class SebeolHangulIMEControlPanel extends AppCompatActivity {
 			return WindowInsetsCompat.CONSUMED;
 		});
     }
+
+	@Override
+	public boolean onPreferenceStartFragment(@NonNull PreferenceFragmentCompat caller, @NonNull Preference pref) {
+		Bundle args = pref.getExtras();
+		String fragmentClassName = pref.getFragment();
+		Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(), fragmentClassName);
+		fragment.setArguments(args);
+		fragment.setTargetFragment(caller, 0);
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.frame_layout, fragment)
+				.addToBackStack(null)
+				.commit();
+		setTitle(pref.getTitle());
+		return true;
+	}
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		if(getSupportFragmentManager().popBackStackImmediate()) {
+			return true;
+		}
+		return super.onSupportNavigateUp();
+	}
 
 	public static class HeadersFragment extends PreferenceFragmentCompat {
 		@Override
