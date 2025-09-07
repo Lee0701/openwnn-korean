@@ -388,10 +388,12 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 				return true;
 
 			case MotionEvent.ACTION_MOVE:
+				if(point == null) return false;
 				return point.onMove(x, y);
 
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
+				if(point == null) return false;
 				point.onUp();
 				mTouchPoints.remove(pointerId);
 				return true;
