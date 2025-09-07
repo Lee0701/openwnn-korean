@@ -54,6 +54,7 @@ public class SebeolHangulIMEControlPanel extends AppCompatActivity implements Pr
 		fragment.setTargetFragment(caller, 0);
 		getSupportFragmentManager()
 				.beginTransaction()
+				.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
 				.replace(R.id.frame_layout, fragment)
 				.addToBackStack(null)
 				.commit();
