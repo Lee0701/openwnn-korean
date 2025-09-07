@@ -2,7 +2,6 @@ package me.blog.hgl1002.openwnn.preference;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.preference.Preference;
 
 import org.json.JSONException;
 import org.json.JSONObject;

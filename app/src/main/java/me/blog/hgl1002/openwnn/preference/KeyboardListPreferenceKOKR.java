@@ -18,8 +18,9 @@ package me.blog.hgl1002.openwnn.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.ListPreference;
 import android.util.AttributeSet;
+
+import androidx.preference.ListPreference;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,19 +46,20 @@ public class KeyboardListPreferenceKOKR extends ListPreference {
         this(context, null);
     }
 
-    /** @see android.preference.DialogPreference#onDialogClosed */
-    @Override protected void onDialogClosed(boolean positiveResult) {
-    	super.onDialogClosed(positiveResult);
-    	
-    	if (positiveResult) {
-			if(keys != null) {
-				SharedPreferences pref = getPreferenceManager().getSharedPreferences();
-				SharedPreferences.Editor editor = pref.edit();
-				String value = getContext().getResources().getStringArray(SoftLayoutPreference.getEntryValues(pref.getString(this.getKey(), "")))[0];
-				for(String key : keys) editor.putString(key, value);
-				editor.commit();
-			}
-			EventBus.getDefault().post(new InputViewChangeEvent());
-    	}
-    }
+	@Override
+	protected boolean persistString(String value) {
+		boolean result = super.persistString(value);
+
+		if(keys != null) {
+			SharedPreferences pref = getPreferenceManager().getSharedPreferences();
+			SharedPreferences.Editor editor = pref.edit();
+			String newValue = getContext().getResources().getStringArray(SoftLayoutPreference.getEntryValues(pref.getString(this.getKey(), "")))[0];
+			for(String key : keys) editor.putString(key, newValue);
+			editor.commit();
+		}
+		EventBus.getDefault().post(new InputViewChangeEvent());
+
+		return result;
+	}
+
 }

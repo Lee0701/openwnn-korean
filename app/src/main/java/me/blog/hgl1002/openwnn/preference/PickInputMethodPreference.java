@@ -2,9 +2,10 @@ package me.blog.hgl1002.openwnn.preference;
 
 import android.app.Service;
 import android.content.Context;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.preference.Preference;
 
 public class PickInputMethodPreference extends Preference {
 	

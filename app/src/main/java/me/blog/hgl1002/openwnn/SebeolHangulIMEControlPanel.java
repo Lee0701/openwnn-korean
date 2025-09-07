@@ -1,125 +1,101 @@
 package me.blog.hgl1002.openwnn;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
-public class SebeolHangulIMEControlPanel extends PreferenceActivity {
-
-	private List<String> fragmentNames = new ArrayList<String>() {{
-		add(InputMethodFragment.class.getName());
-		add(KeyboardAppearanceFragment.class.getName());
-		add(SoftKeyboardFragment.class.getName());
-		add(HardKeyboardFragment.class.getName());
-		add(SystemFragment.class.getName());
-		add(AboutFragment.class.getName());
-		add(DeveloperFragment.class.getName());
-	}};
+public class SebeolHangulIMEControlPanel extends AppCompatActivity {
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		if(SebeolHangulIME.getInstance() == null) {
 			new SebeolHangulIME(this);
 		}
+		setContentView(R.layout.activity_settings);
+		if(savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.frame_layout, new HeadersFragment())
+					.commit();
+		}
+		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.frame_layout), (OnApplyWindowInsetsListener) (view, windowInsets) -> {
+			Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+			params.topMargin = insets.top;
+			params.bottomMargin = insets.bottom;
+			params.leftMargin = insets.left;
+			params.rightMargin = insets.right;
+			view.setLayoutParams(params);
+			return WindowInsetsCompat.CONSUMED;
+		});
+    }
 
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_method);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_appearance);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_softkeyboard);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_hardkeyboard);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_system);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_about);
-			if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("hidden_settings_revealed", false)) {
-				addPreferencesFromResource(R.xml.openwnn_pref_ko_developer);
+	public static class HeadersFragment extends PreferenceFragmentCompat {
+		@Override
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			if(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("reveal_dev_settings", false)) {
+				setPreferencesFromResource(R.xml.openwnn_pref_ko_headers_dev, rootKey);
+			} else {
+				setPreferencesFromResource(R.xml.openwnn_pref_ko_headers, rootKey);
 			}
 		}
 	}
 
-	@TargetApi(11)
-	@Override
-	public void onBuildHeaders(List<Header> target) {
-		if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("reveal_dev_settings", false)) {
-			loadHeadersFromResource(R.xml.openwnn_pref_ko_headers_dev, target);
-		} else {
-			loadHeadersFromResource(R.xml.openwnn_pref_ko_headers, target);
+	public static class InputMethodFragment extends PreferenceFragmentCompat {
+		@Override
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_method, rootKey);
 		}
 	}
 
-	@TargetApi(11)
-	@Override
-	protected boolean isValidFragment(String fragmentName) {
-		return fragmentNames.contains(fragmentName);
-	}
-
-	@TargetApi(11)
-	public static class InputMethodFragment extends PreferenceFragment {
+	public static class KeyboardAppearanceFragment extends PreferenceFragmentCompat {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_method);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_appearance, rootKey);
 		}
 	}
 
-	@TargetApi(11)
-	public static class KeyboardAppearanceFragment extends PreferenceFragment {
+	public static class SoftKeyboardFragment extends PreferenceFragmentCompat {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_appearance);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_softkeyboard, rootKey);
 		}
 	}
 
-	@TargetApi(11)
-	public static class SoftKeyboardFragment extends PreferenceFragment {
+	public static class HardKeyboardFragment extends PreferenceFragmentCompat {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_softkeyboard);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_hardkeyboard, rootKey);
 		}
 	}
 
-	@TargetApi(11)
-	public static class HardKeyboardFragment extends PreferenceFragment {
+	public static class SystemFragment extends PreferenceFragmentCompat {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_hardkeyboard);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_system, rootKey);
 		}
 	}
 
-	@TargetApi(11)
-	public static class SystemFragment extends PreferenceFragment {
+	public static class AboutFragment extends PreferenceFragmentCompat {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_system);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_about, rootKey);
 		}
 	}
 
-	@TargetApi(11)
-	public static class AboutFragment extends PreferenceFragment {
+	public static class DeveloperFragment extends PreferenceFragmentCompat {
 		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_about);
-		}
-	}
-
-	@TargetApi(11)
-	public static class DeveloperFragment extends PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.openwnn_pref_ko_developer);
+		public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+			setPreferencesFromResource(R.xml.openwnn_pref_ko_developer, rootKey);
 		}
 	}
 
