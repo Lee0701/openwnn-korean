@@ -24,7 +24,7 @@
         <activity
             android:name=".SebeolHangulIMEControlPanel"
             android:label="@string/preference_ime_setting_app"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:theme="@style/AppTheme"
             android:enableOnBackInvokedCallback="false"
             android:exported="true">
             <intent-filter>
