@@ -1,23 +1,23 @@
 apply plugin: 'com.android.application'
 android {
-    namespace 'me.blog.hgl1002.openwnn'
-    compileSdk 36
+    namespace = 'me.blog.hgl1002.openwnn'
+    compileSdk = 36
 
     defaultConfig {
-        applicationId "me.blog.hgl1002.openwnn"
-        minSdk 14
-        targetSdk 36
-        versionCode 23091902
-        versionName "230919-02"
+        applicationId = "me.blog.hgl1002.openwnn"
+        minSdk = 14
+        targetSdk = 36
+        versionCode = 23091902
+        versionName = "230919-02"
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
         }
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
