@@ -1100,6 +1100,11 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
 			break;
 
+		case "l4.0":
+			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l4_0_8cols);
+			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l4_0_8cols);
+			break;
+
 		case "pc1":
 			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_pc1_alphanumeric);
 			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_pc1_alphanumeric);

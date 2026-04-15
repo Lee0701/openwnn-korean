@@ -86,6 +86,7 @@
     <string name="preference_keyboard_l1_10">L1.10 Dvorak</string>
     <string name="preference_keyboard_l2_0">L2.0 11열</string>
     <string name="preference_keyboard_l3_0">L3.0 9열</string>
+    <string name="preference_keyboard_l4_0">L4.0 8열</string>
     <string name="preference_keyboard_pc1">PC1 알파벳, 숫자열</string>
 
     <string name="preference_keyboard_hangul_title">한글 키보드 종류</string>
@@ -96,6 +97,7 @@
     <string name="preference_keyboard_dubul_nk">두벌식 북한 국규</string>
     <string name="preference_keyboard_dubul_dugyeobe">두벌식 두겹이 (신세기)</string>
     <string name="preference_keyboard_dubul_dujule">두벌식 두줄이 (신세기)</string>
+    <string name="preference_keyboard_dubul_danmoeum_dujule">두벌식 두줄이 단모음 (신세기)</string>
     <string name="preference_keyboard_sebul_390">세벌식 390</string>
     <string name="preference_keyboard_sebul_391">세벌식 최종</string>
     <string name="preference_keyboard_sebul_390_10cols">세벌식 390 (10열 배열)</string>

@@ -76,6 +76,9 @@ public class SoftLayoutPreference extends ListPreference {
 		case "keyboard_sebul_semoe":
 			return R.array.keyboard_soft_layout_l3_0;
 
+		case "keyboard_dubul_danmoeum_dujule":
+			return R.array.keyboard_soft_layout_l4_0;
+
 		case "keyboard_alphabet_dvorak":
 			return R.array.keyboard_soft_layout_dvorak;
 
@@ -121,6 +124,9 @@ public class SoftLayoutPreference extends ListPreference {
 
 		case "keyboard_sebul_semoe":
 			return R.array.keyboard_soft_layout_l3_0_id;
+
+		case "keyboard_dubul_danmoeum_dujule":
+			return R.array.keyboard_soft_layout_l4_0_id;
 
 		case "keyboard_alphabet_colemak":
 			return R.array.keyboard_soft_layout_l1_9_id;

@@ -34,6 +34,7 @@ import static me.blog.hgl1002.openwnn.layout.LayoutDubul.JAMO_DUBUL_NK;
 import static me.blog.hgl1002.openwnn.layout.LayoutDubul.JAMO_DUBUL_STANDARD;
 import static me.blog.hgl1002.openwnn.layout.LayoutDubul.JAMOSET_DUBUL_DUGYEOBE;
 import static me.blog.hgl1002.openwnn.layout.LayoutDubul.JAMO_DUBUL_DUJULE;
+import static me.blog.hgl1002.openwnn.layout.LayoutDubul.JAMO_DUBUL_DANMOEUM_DUJULE;
 import static me.blog.hgl1002.openwnn.layout.LayoutDubul.JAMO_DUBUL_YET;
 import static me.blog.hgl1002.openwnn.layout.LayoutGongSebul.COMB_FULL;
 import static me.blog.hgl1002.openwnn.layout.LayoutGongSebul.COMB_SEBULSIK;
@@ -74,6 +75,7 @@ public enum EngineMode {
 	DUBULSIK_NK		(new Properties(), JAMO_DUBUL_NK, null, COMB_DUBUL_STANDARD, null, "keyboard_dubul_nk"),
 	DUBULSIK_DUGYEOBE		(new Properties(), null, JAMOSET_DUBUL_DUGYEOBE, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_dugyeobe"),
 	DUBULSIK_DUJULE		(new Properties(), JAMO_DUBUL_DUJULE, null, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_dujule"),
+	DUBULSIK_DANMOEUM_DUJULE		(new Properties(), JAMO_DUBUL_DANMOEUM_DUJULE, null, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_danmoeum_dujule"),
 
 	SEBUL_SUN_2014		(new Properties(), JAMO_SEBUL_SUN_2014, null, COMB_SEBUL_SUN_2014, null, "keyboard_sebul_sun_2014"),
 	SEBUL_3_2015M		(new Properties(), null, JAMOSET_SEBUL_3_2015M, COMB_SEBUL_3_2015, null, "keyboard_sebul_3_2015m"),

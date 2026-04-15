@@ -148,14 +148,16 @@
     <string name="preference_keyboard_l1_10">L1.10 Dvorak</string>
     <string name="preference_keyboard_l2_0">L2.0 11-Cols</string>
     <string name="preference_keyboard_l3_0">L3.0 9-Cols</string>
+    <string name="preference_keyboard_l4_0">L4.0 8-Cols</string>
 
     <string name="preference_keyboard_pc1">PC1 Alphanumeric</string>
 
     <string name="preference_keyboard_dubul_standard">Dubeolsik Standard</string>
     <string name="preference_keyboard_dubul_danmoeum_google">Dubeolsik Google Danmoeum (Single-Vowel)</string>
     <string name="preference_keyboard_dubul_nk">Dubeolsik North Korea</string>
-  <string name="preference_keyboard_dubul_dugyeobe">Dubeolsik Dugyeob-e by Shin Segi</string>
-  <string name="preference_keyboard_dubul_dujule">Dubeolsik Dujul-e by Shin Segi</string>
+    <string name="preference_keyboard_dubul_dugyeobe">Dubeolsik Dugyeob-e by Shin Segi</string>
+    <string name="preference_keyboard_dubul_dujule">Dubeolsik Dujul-e by Shin Segi</string>
+    <string name="preference_keyboard_dubul_danmoeum_dujule">Dubeolsik Dujul-e Danmoeum (Single-Vowel) by Shin Segi</string>
     <string name="preference_keyboard_sebul_390">Sebeolsik 390</string>
     <string name="preference_keyboard_sebul_391">Sebeolsik Final</string>
     <string name="preference_keyboard_sebul_390_10cols">Sebeolsik 390 (10-Columns Layout)</string>
