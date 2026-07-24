@@ -86,7 +86,6 @@
     <string name="preference_keyboard_l1_10">L1.10 Dvorak</string>
     <string name="preference_keyboard_l2_0">L2.0 11열</string>
     <string name="preference_keyboard_l3_0">L3.0 9열</string>
-    <string name="preference_keyboard_l4_0">L4.0 8열</string>
     <string name="preference_keyboard_pc1">PC1 알파벳, 숫자열</string>
 
     <string name="preference_keyboard_hangul_title">한글 키보드 종류</string>

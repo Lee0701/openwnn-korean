@@ -474,6 +474,11 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 				keyList[KEYBOARD_SHIFT_OFF][KEYMODE_HANGUL][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_dubul_danmoeum_google);
 				break;
 
+			case "keyboard_dubul_danmoeum_dujule":
+				keyList[KEYBOARD_SHIFT_OFF][KEYMODE_HANGUL][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_dubul_danmoeum_dujule);
+				keyList[KEYBOARD_SHIFT_ON][KEYMODE_HANGUL][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_dubul_danmoeum_dujule_shift);
+				break;
+
 			case "keyboard_12key_sebul_munhwa":
 			case "keyboard_12key_sebul_munhwa_predictive":
 				keyList[KEYBOARD_SHIFT_OFF][KEYMODE_HANGUL][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_12key_sebul_munhwa);
@@ -1098,11 +1103,6 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 		case "l3.0":
 			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
 			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
-			break;
-
-		case "l4.0":
-			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l4_0_8cols);
-			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l4_0_8cols);
 			break;
 
 		case "pc1":

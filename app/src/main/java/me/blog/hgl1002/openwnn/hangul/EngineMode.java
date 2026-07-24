@@ -75,7 +75,6 @@ public enum EngineMode {
 	DUBULSIK_NK		(new Properties(), JAMO_DUBUL_NK, null, COMB_DUBUL_STANDARD, null, "keyboard_dubul_nk"),
 	DUBULSIK_DUGYEOBE		(new Properties(), null, JAMOSET_DUBUL_DUGYEOBE, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_dugyeobe"),
 	DUBULSIK_DUJULE		(new Properties(), JAMO_DUBUL_DUJULE, null, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_dujule"),
-	DUBULSIK_DANMOEUM_DUJULE		(new Properties(), JAMO_DUBUL_DANMOEUM_DUJULE, null, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_danmoeum_dujule"),
 
 	SEBUL_SUN_2014		(new Properties(), JAMO_SEBUL_SUN_2014, null, COMB_SEBUL_SUN_2014, null, "keyboard_sebul_sun_2014"),
 	SEBUL_3_2015M		(new Properties(), null, JAMOSET_SEBUL_3_2015M, COMB_SEBUL_3_2015, null, "keyboard_sebul_3_2015m"),
@@ -120,6 +119,8 @@ public enum EngineMode {
 			CYCLE_DUBUL_12KEY_SKY2, null, COMB_DUBUL_12KEY_SKY2, null, "keyboard_12key_dubul_sky2"),
 	TWELVE_DUBUL_DANMOEUM				(new Properties(true, false, true),
 			JAMO_DUBUL_DANMOEUM_GOOGLE, null, COMB_DUBUL_DANMOEUM_GOOGLE, null, "keyboard_dubul_danmoeum_google"),
+	DUBULSIK_DANMOEUM_DUJULE			(new Properties(false, false, false),
+			JAMO_DUBUL_DANMOEUM_DUJULE, null, COMB_DUBUL_EXPANSION, null, "keyboard_dubul_danmoeum_dujule"),
 
 	ENGLISH_QWERTY	(new Properties(DefaultSoftKeyboard.LANG_EN, false, false, false, false, false, false),
 			null, null, null, null, "keyboard_alphabet_qwerty"),
