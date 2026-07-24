@@ -376,6 +376,7 @@ public class HangulEngine {
 			result = INPUT_CHO2;
 		// 두벌식 중성.
 		} else if(filteredCode >= 0x314f && filteredCode <= 0x3163 || filteredCode >= 0x3187 && filteredCode <= 0x318e) {
+			int prevLastInputType = lastInputType;
 			// 조합 중인 종성이 없을 경우.
 			if(this.jong == -1) {
 				// 표준 한글 자모의 중성과 호환용 한글 자모의 중성은 배열 순서가 같음.
@@ -448,7 +449,9 @@ public class HangulEngine {
 				}
 				last = (jungCode >= 0) ? jungCode + 0x1161 : jungCode;
 			}
-			result = INPUT_JUNG2;
+			if (prevLastInputType == 0) result = INPUT_JUNG2;
+			else if (preserveState) result = INPUT_CHO2;
+			else result = INPUT_JUNG2;
 		}
 		// 한글 낱자가 아닐 경우
 		else {

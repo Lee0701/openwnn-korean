@@ -48,6 +48,7 @@ public class SoftLayoutPreference extends ListPreference {
 
 	public static int getEntries(String layout) {
 		switch(layout) {
+		case "keyboard_dubul_dujule":
 		case "keyboard_sebul_390":
 		case "keyboard_sebul_391":
 		case "keyboard_sebul_sun_2014":
@@ -64,11 +65,16 @@ public class SoftLayoutPreference extends ListPreference {
 		case "keyboard_sebul_393y":
 			return R.array.keyboard_soft_layout_l1_3;
 
+		case "keyboard_sebul_chamshin":
+		case "keyboard_sebul_chamshin_d":
 		case "keyboard_sebul_ahnmatae":
 			return R.array.keyboard_soft_layout_l1_4;
 
 		case "keyboard_alphabet_colemak":
 			return R.array.keyboard_soft_layout_l1_9;
+
+		case "keyboard_sebul_semoe":
+			return R.array.keyboard_soft_layout_l0_9;
 
 		case "keyboard_alphabet_dvorak":
 			return R.array.keyboard_soft_layout_dvorak;
@@ -78,11 +84,10 @@ public class SoftLayoutPreference extends ListPreference {
 			return R.array.keyboard_soft_layout_alt;
 
 		case "keyboard_alphabet_qwerty":
-		case "keyboard_sebul_semoe_2016":
-		case "keyboard_sebul_semoe":
 		case "keyboard_sebul_danmoeum":
 		case "keyboard_dubul_standard":
 		case "keyboard_dubul_nk":
+		case "keyboard_dubul_dugyeobe":
 		case "keyboard_dubul_yet":
 		default:
 			return R.array.keyboard_soft_layout;
@@ -92,6 +97,7 @@ public class SoftLayoutPreference extends ListPreference {
 
 	public static int getEntryValues(String layout) {
 		switch(layout) {
+		case "keyboard_dubul_dujule":
 		case "keyboard_sebul_390":
 		case "keyboard_sebul_391":
 		case "keyboard_sebul_sun_2014":
@@ -108,8 +114,13 @@ public class SoftLayoutPreference extends ListPreference {
 		case "keyboard_sebul_393y":
 			return R.array.keyboard_soft_layout_l1_3_id;
 
+		case "keyboard_sebul_chamshin":
+		case "keyboard_sebul_chamshin_d":
 		case "keyboard_sebul_ahnmatae":
 			return R.array.keyboard_soft_layout_l1_4_id;
+
+		case "keyboard_sebul_semoe":
+			return R.array.keyboard_soft_layout_l0_9_id;
 
 		case "keyboard_alphabet_colemak":
 			return R.array.keyboard_soft_layout_l1_9_id;
@@ -122,11 +133,10 @@ public class SoftLayoutPreference extends ListPreference {
 			return R.array.keyboard_soft_layout_alt_id;
 
 		case "keyboard_alphabet_qwerty":
-		case "keyboard_sebul_semoe_2016":
-		case "keyboard_sebul_semoe":
 		case "keyboard_sebul_danmoeum":
 		case "keyboard_dubul_standard":
 		case "keyboard_dubul_nk":
+        case "keyboard_dubul_dugyeobe":
 		case "keyboard_dubul_yet":
 		default:
 			return R.array.keyboard_soft_layout_id;
