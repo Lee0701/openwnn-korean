@@ -66,6 +66,7 @@
 
 	<string-array name="keyboard_soft_layout_l0_9">
 		<item>@string/preference_keyboard_l0_9</item>
+		<item>@string/preference_keyboard_l0_9_1</item>
 		<item>@string/preference_keyboard_l1_0</item>
 		<item>@string/preference_keyboard_l1_1</item>
 		<item>@string/preference_keyboard_l1_2</item>
@@ -78,6 +79,7 @@
 
 	<string-array name="keyboard_soft_layout_l0_9_id">
 		<item>l0.9</item>
+		<item>l0.9.1</item>
 		<item>l1.0</item>
 		<item>l1.1</item>
 		<item>l1.2</item>
