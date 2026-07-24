@@ -1060,6 +1060,11 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 
 	protected void loadSoftLayout(Keyboard[][][] keyList, int keyMode, String softLayout) {
 		switch(softLayout) {
+		case "l0.9":
+			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
+			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
+			break;
+
 		case "l1.0":
 			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l1_0_mobile);
 			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l1_0_mobile);
@@ -1098,11 +1103,6 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 		case "l2.0":
 			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l2_0_11cols);
 			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l2_0_11cols);
-			break;
-
-		case "l3.0":
-			keyList[KEYBOARD_SHIFT_OFF][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
-			keyList[KEYBOARD_SHIFT_ON][keyMode][0] = loadKeyboardLayout(mIME, R.xml.keyboard_ko_l3_0_9cols);
 			break;
 
 		case "pc1":

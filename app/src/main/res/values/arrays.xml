@@ -40,7 +40,6 @@
 	    <item>@string/preference_keyboard_l1_4</item>
 	    <item>@string/preference_keyboard_l1_9</item>
 	    <item>@string/preference_keyboard_l2_0</item>
-		<item>@string/preference_keyboard_l3_0</item>
 	    <item>@string/preference_keyboard_pc1</item>
     </string-array>
 
@@ -52,7 +51,6 @@
 	    <item>l1.4</item>
 	    <item>l1.9</item>
 	    <item>l2.0</item>
-		<item>l3.0</item>
 	    <item>pc1</item>
     </string-array>
 
@@ -64,6 +62,30 @@
 	<string-array name="keyboard_soft_layout_alt_id">
 		<item>l1.0</item>
 		<item>l1.1</item>
+	</string-array>
+
+	<string-array name="keyboard_soft_layout_l0_9">
+		<item>@string/preference_keyboard_l0_9</item>
+		<item>@string/preference_keyboard_l1_0</item>
+		<item>@string/preference_keyboard_l1_1</item>
+		<item>@string/preference_keyboard_l1_2</item>
+		<item>@string/preference_keyboard_l1_3</item>
+		<item>@string/preference_keyboard_l1_4</item>
+		<item>@string/preference_keyboard_l1_9</item>
+		<item>@string/preference_keyboard_l2_0</item>
+		<item>@string/preference_keyboard_pc1</item>
+	</string-array>
+
+	<string-array name="keyboard_soft_layout_l0_9_id">
+		<item>l0.9</item>
+		<item>l1.0</item>
+		<item>l1.1</item>
+		<item>l1.2</item>
+		<item>l1.3</item>
+		<item>l1.4</item>
+		<item>l1.9</item>
+		<item>l2.0</item>
+		<item>pc1</item>
 	</string-array>
 
 	<string-array name="keyboard_soft_layout_l1_2">
@@ -120,20 +142,6 @@
 		<item>l1.3</item>
 		<item>l1.4</item>
 		<item>l1.9</item>
-		<item>l2.0</item>
-		<item>pc1</item>
-	</string-array>
-
-	<string-array name="keyboard_soft_layout_l3_0">
-		<item>@string/preference_keyboard_l3_0</item>
-		<item>@string/preference_keyboard_l1_2</item>
-		<item>@string/preference_keyboard_l2_0</item>
-		<item>@string/preference_keyboard_pc1</item>
-	</string-array>
-
-	<string-array name="keyboard_soft_layout_l3_0_id">
-		<item>l3.0</item>
-		<item>l1.2</item>
 		<item>l2.0</item>
 		<item>pc1</item>
 	</string-array>

@@ -77,6 +77,7 @@
     <string name="preference_keyboard_hangul_soft_landscape_title">한글 화면 키보드 레이아웃 (가로화면)</string>
     <string name="preference_keyboard_hangul_soft_summary">한글 화면 키보드 레이아웃을 설정합니다.</string>
 
+    <string name="preference_keyboard_l0_9">L0.9 9열</string>
     <string name="preference_keyboard_l1_0">L1.0 모바일</string>
     <string name="preference_keyboard_l1_1">L1.1 숫자열 있는 모바일</string>
     <string name="preference_keyboard_l1_2">L1.2 따옴표 위치 변형</string>
@@ -85,7 +86,6 @@
     <string name="preference_keyboard_l1_9">L1.9 세미콜론</string>
     <string name="preference_keyboard_l1_10">L1.10 Dvorak</string>
     <string name="preference_keyboard_l2_0">L2.0 11열</string>
-    <string name="preference_keyboard_l3_0">L3.0 9열</string>
     <string name="preference_keyboard_pc1">PC1 알파벳, 숫자열</string>
 
     <string name="preference_keyboard_hangul_title">한글 키보드 종류</string>
