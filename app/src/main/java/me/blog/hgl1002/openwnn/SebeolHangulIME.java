@@ -296,6 +296,12 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 	@Override
 	public void onStartInput(EditorInfo attribute, boolean restarting) {
 		super.onStartInput(attribute, restarting);
+		// 입력 창을 띄우지 않으면(하드웨어 키보드만 사용) onStartInputView 가 불리지 않으므로 여기서 초기화한다
+		if(!onEvaluateInputViewShown()) {
+			View inputView = onCreateInputView();
+			if(inputView != null) setInputView(inputView);
+			onStartInputView(attribute, restarting);
+		}
 	}
 
 	@Override
@@ -344,18 +350,19 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 	@Subscribe
 	public void onKeyUp(KeyUpEvent event) {
 		int key = event.getKeyEvent().getKeyCode();
-		if(!mShiftPressing){
-			if(key == KeyEvent.KEYCODE_SHIFT_LEFT
-					|| key == KeyEvent.KEYCODE_SHIFT_RIGHT){
-				mHardShift = 0;
+		if(key == KeyEvent.KEYCODE_SHIFT_LEFT
+				|| key == KeyEvent.KEYCODE_SHIFT_RIGHT){
+			// 하드웨어 Shift 는 누르고 있는 동안만 적용한다
+			if(mShiftOnCapsLock) {
+				mHardShift = 2;
 				mShiftPressing = true;
-				if(mShiftOnCapsLock) {
-					mHardShift = 2;
-					mShiftOnCapsLock = false;
-				}
-				updateMetaKeyStateDisplay();
-				updateNumKeyboardShiftState();
+				mShiftOnCapsLock = false;
+			} else if(!mCapsLock) {
+				mHardShift = 0;
+				mShiftPressing = false;
 			}
+			updateMetaKeyStateDisplay();
+			updateNumKeyboardShiftState();
 		}
 		if(!mAltPressing) {
 			if(key == KeyEvent.KEYCODE_ALT_LEFT || key == KeyEvent.KEYCODE_ALT_RIGHT){
@@ -558,9 +565,7 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 
 		case KeyEvent.KEYCODE_SHIFT_LEFT:
 		case KeyEvent.KEYCODE_SHIFT_RIGHT:
-			if (keyEvent.getRepeatCount() == 0) {
-				if (++mHardShift > 2) { mHardShift = 0; }
-			}
+			mHardShift = 1;
 			mShiftPressing = true;
 			if(mCapsLock) {
 				mHardShift = 0;
@@ -1051,9 +1056,11 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 
 	@Override
 	public void hideWindow() {
+		boolean wasShown = isInputViewShown();
 		mInputViewManager.closing();
 		super.hideWindow();
-		mDirectInputMode = true;
+		// 입력 창 없이 하드웨어 키보드로 입력 중일 때는 한글 입력을 유지한다
+		if(wasShown) mDirectInputMode = true;
 		hideStatusIcon();
 	}
 
@@ -1106,9 +1113,9 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 		boolean ret = mConsumeDownEvent;
 		if(!ret) {
 			ret = super.onKeyUp(keyCode, event);
-		} else {
-			EventBus.getDefault().post(new KeyUpEvent(event));
 		}
+		// Shift 를 단독으로 눌렀다 떼는 경우에도 해제되도록 항상 전달한다
+		EventBus.getDefault().post(new KeyUpEvent(event));
 		return ret;
 	}
 
@@ -1119,8 +1126,11 @@ public class SebeolHangulIME extends InputMethodService implements HangulEngineL
 
 	@Override
 	public boolean onEvaluateInputViewShown() {
-		super.onEvaluateInputViewShown();
-		return true;
+		if (super.onEvaluateInputViewShown()) return true;
+		// 하드웨어 키보드 사용 중에는 서브 뷰나 숫자 키보드를 표시할 때만 입력 창을 띄운다
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		return pref.getBoolean("hardware_use_subview", true)
+				|| pref.getBoolean("hardware_use_numkeyboard", false);
 	}
 
 	/** @see android.inputmethodservice.InputMethodService#setCandidatesViewShown */

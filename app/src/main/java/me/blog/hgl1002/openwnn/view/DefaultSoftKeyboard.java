@@ -996,7 +996,7 @@ public class DefaultSoftKeyboard extends me.blog.hgl1002.openwnn.DefaultSoftKeyb
 		}
 		mKeyboardView.setPreviewEnabled(false);
 		mNumKeyboardView.setPreviewEnabled(false);
-		boolean showNum = pref.getBoolean("hardware_use_numkeyboard", true);
+		boolean showNum = pref.getBoolean("hardware_use_numkeyboard", false);
 		if(showNum != mShowNumKeyboardViewPortrait || showNum != mShowNumKeyboardViewLandscape) {
 			mShowNumKeyboardViewLandscape = mShowNumKeyboardViewPortrait = showNum;
 			EventBus.getDefault().post(new InputViewChangeEvent());
